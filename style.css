@@ -1,0 +1,246 @@
+/* ===== 리얼미 랜딩 — 기본 리셋 ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy: #16233f;        /* 배경 네이비 */
+  --navy-deep: #0f1a30;
+  --lime: #c8f73c;        /* 포인트 라임 */
+  --lime-text: #16233f;
+  --white: #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  /* 고정 푸터 배너에 마지막 영역이 가리지 않도록 (배너가 커지면 함께 키움) */
+  padding-bottom: 140px;
+}
+
+/* ===== 이미지 세로 스택 ===== */
+.landing {
+  max-width: 860px;      /* 원본 이미지 폭 */
+  margin: 0 auto;
+  background: var(--navy);
+  display: block;
+}
+
+.sec { display: block; line-height: 0; }
+.sec img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ===== 스크롤 리빌 애니메이션 ===== */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .8s ease, transform .8s cubic-bezier(.16,1,.3,1);
+  will-change: opacity, transform;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+/* 사장님 요청: 스크롤 등장 모션은 '동작 줄이기' 설정과 무관하게 항상 표시 */
+
+/* ===== 신청 폼 영역 ===== */
+.form-section {
+  background: var(--navy-deep);
+  padding: 56px 20px 80px;
+  text-align: center;
+  scroll-margin-top: 20px;
+}
+.form-title {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.form-sub {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #aab4c8;
+}
+#form-container {
+  max-width: 440px;
+  margin: 30px auto 0;
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: left;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+.field { margin-bottom: 16px; }
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #2b3036;
+  margin-bottom: 7px;
+}
+.field input {
+  width: 100%;
+  border: 1.5px solid #d6dbe3;
+  border-radius: 10px;
+  padding: 13px 14px;
+  font-size: 16px;       /* iOS 자동 확대 방지 */
+  font-family: inherit;
+  color: #16233f;
+  background: #fff;
+  transition: border-color .15s ease;
+}
+.field input:focus {
+  outline: none;
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(22,35,63,0.08);
+}
+.field input::placeholder { color: #aab1bd; }
+
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 4px 0 18px;
+  cursor: pointer;
+}
+.consent input {
+  margin-top: 2px;
+  width: 18px; height: 18px;
+  flex: 0 0 auto;
+  accent-color: var(--navy);
+}
+.consent span {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #5a6472;
+}
+.consent b { color: #16233f; font-weight: 700; }
+
+.form-notice {
+  background: #f4f6f9;
+  border: 1px solid #e3e8ef;
+  border-radius: 10px;
+  padding: 13px 15px;
+  margin: 4px 0 18px;
+}
+.form-notice p {
+  position: relative;
+  padding-left: 13px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #5a6472;
+}
+.form-notice p + p { margin-top: 5px; }
+.form-notice p::before {
+  content: "•";
+  position: absolute;
+  left: 2px;
+  color: #98a2b3;
+}
+
+.form-submit {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 16px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  background: var(--navy);
+  cursor: pointer;
+  transition: filter .15s ease, transform .1s ease;
+}
+.form-submit:hover { filter: brightness(1.12); }
+.form-submit:active { transform: translateY(1px); }
+
+.form-msg {
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  min-height: 20px;
+}
+.form-msg.ok    { color: #1f9d55; }
+.form-msg.error { color: #d64545; }
+
+/* ===== 고정 푸터 CTA 배너 ===== */
+.sticky-cta {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 9999;
+  background: rgba(15, 26, 48, 0.97);
+  backdrop-filter: blur(6px);
+  border-top: 1px solid rgba(200, 247, 60, 0.25);
+  /* 화면 내내 항상 표시 */
+}
+
+.sticky-cta__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 40px;
+}
+.sticky-cta__text {
+  font-size: 23px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.35;
+}
+.sticky-cta__text b { color: var(--lime); font-weight: 800; }
+
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.55); }
+  50%      { box-shadow: 0 0 0 10px rgba(230, 57, 70, 0); }
+}
+
+.sticky-cta__btn {
+  flex: 0 0 auto;
+  display: inline-block;
+  background: #e63946;       /* 눈에 띄는 레드 */
+  color: #fff;
+  font-weight: 900;
+  font-size: 24px;
+  text-decoration: none;
+  padding: 20px 50px;
+  border-radius: 999px;
+  white-space: nowrap;
+  animation: ctaPulse 1.8s infinite;
+  transition: transform .15s ease, background .15s ease;
+}
+.sticky-cta__btn:hover { background: #f04553; transform: translateY(-1px); }
+.sticky-cta__btn:active { transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .sticky-cta__btn { animation: none; }
+}
+
+/* 모바일 */
+@media (max-width: 520px) {
+  /* 모바일: 문구 위 + 풀폭 버튼 아래로 쌓기 (탭하기 쉬운 큰 버튼) */
+  .sticky-cta__inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 9px;
+    padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px));
+  }
+  .sticky-cta__text {
+    font-size: 15px;
+    text-align: center;
+  }
+  .sticky-cta__btn {
+    font-size: 18px;
+    font-weight: 900;
+    padding: 16px;
+    width: 100%;
+    text-align: center;
+  }
+  .form-title { font-size: 22px; }
+}
