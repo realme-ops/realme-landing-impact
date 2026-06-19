@@ -11,8 +11,9 @@
     try { if (typeof window.gtag === "function") window.gtag("event", name, params); } catch (e) {}
     try {
       if (typeof window.fbq === "function") {
-        // 표준 이벤트 매핑 (메타 전환 목표 = Lead)
-        var map = { cta_click: "Lead", form_submit: "CompleteRegistration" };
+        // 전환(광고 최적화) = 사전 설문지 신청(form_submit) → 메타 표준 Lead
+        // 상단 '상담 신청하기' 클릭(cta_click)은 표준 전환 아님 → 퍼널 참고용 커스텀 이벤트로만 기록
+        var map = { form_submit: "Lead" };
         if (map[name]) window.fbq("track", map[name], params);
         else window.fbq("trackCustom", name, params);
       }
