@@ -74,14 +74,12 @@
       var age = (document.getElementById("f-age").value || "").trim();
       var phoneVal = (document.getElementById("f-phone").value || "").trim();
       var consent = document.getElementById("f-consent").checked;
-      var consent2 = document.getElementById("f-consent2").checked;
       var digits = phoneVal.replace(/\D/g, "");
 
       if (!name) { showMsg("이름을 입력해 주세요.", "error"); return; }
       if (!age) { showMsg("나이를 입력해 주세요.", "error"); return; }
       if (digits.length < 10 || digits.length > 11) { showMsg("전화번호를 정확히 입력해 주세요.", "error"); return; }
       if (!consent) { showMsg("개인정보 수집·이용에 동의해 주세요.", "error"); return; }
-      if (!consent2) { showMsg("예약금·환불 정책에 동의해 주세요.", "error"); return; }
 
       // 전환 이벤트 발사 (메타 CompleteRegistration + GA4 + GTM)
       trackEvent("form_submit", { location: "apply_section" });
