@@ -17,24 +17,13 @@
      트래킹 ID — 여기 세 곳만 실제 ID로 교체하세요
      ============================================================ -->
 <script>
+  // 단일 캠페인 랜딩 — 픽셀 중복 방지를 위해 GTM 미사용. 메타픽셀 + GA4를 코드로 직접 관리.
   window.REALME_CONFIG = {
-    GTM_ID:        "GTM-5GL4L82H",     // Google Tag Manager 컨테이너 ID
     GA4_ID:        "G-TYWS49LKCM",     // GA4 측정 ID
     META_PIXEL_ID: "468864818533646", // 메타(페이스북) 픽셀 ID
-    FORM_ENDPOINT: "https://npjudvehidwjofnmsdos.supabase.co/functions/v1/send-sms-landing",  // 폼 전송 주소 (비우면 제출 시 완료 메시지만 표시)
-    SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5wanVkdmVoaWR3am9mbm1zZG9zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4MzUwMjksImV4cCI6MjA5MjQxMTAyOX0.1tk4J56b5UomneHiFGMql_pfbVYUAEZsQnbRh09DI6U"  // Supabase anon(public) key — 함수 호출 인증용 (공개돼도 안전)
+    FORM_ENDPOINT: "https://script.google.com/macros/s/AKfycbw4nfK6yVc9c_8X-Tdr_5GjQodfymoA8gl8KF_PGP_BT60-kp0dILYCgKvbAC33G6Oc_Q/exec"  // 구글 시트 수집
   };
 </script>
-
-<!-- Google Tag Manager -->
-<script>
-(function(w,d,s,l,i){if(!i||i.indexOf('X')>-1)return;w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer',window.REALME_CONFIG.GTM_ID);
-</script>
-<!-- End Google Tag Manager -->
 
 <!-- Google Analytics 4 -->
 <script>
@@ -63,10 +52,6 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-<!-- GTM noscript -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5GL4L82H"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <main class="landing">
   <!-- 8개 섹션 이미지 (위에서 아래로) -->
@@ -101,7 +86,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <label class="consent">
           <input type="checkbox" id="f-consent" name="consent" required />
-          <span>입력하신 <b>개인정보는 사전 설문지 발송에만</b> 사용됩니다. (필수 동의)</span>
+          <span>입력하신 <b>개인정보 수집·이용</b>에 동의합니다. (필수)</span>
+        </label>
+        <label class="consent">
+          <input type="checkbox" id="f-consent-ad" name="consentAd" required />
+          <span>입력하신 정보의 <b>광고·마케팅 활용 및 연락 수신</b>에 동의합니다. (필수)</span>
         </label>
 
         <div class="form-notice">

@@ -11,8 +11,9 @@
     try { if (typeof window.gtag === "function") window.gtag("event", name, params); } catch (e) {}
     try {
       if (typeof window.fbq === "function") {
-        // 표준 이벤트 매핑 (메타 전환 목표 = Lead)
-        var map = { cta_click: "Lead", form_submit: "CompleteRegistration" };
+        // 전환(광고 최적화) = 사전 설문지 신청(form_submit) → 메타 표준 Lead
+        // 상단 '상담 신청하기' 클릭(cta_click)은 표준 전환 아님 → 퍼널 참고용 커스텀 이벤트로만 기록
+        var map = { form_submit: "Lead" };
         if (map[name]) window.fbq("track", map[name], params);
         else window.fbq("trackCustom", name, params);
       }
@@ -74,12 +75,14 @@
       var age = (document.getElementById("f-age").value || "").trim();
       var phoneVal = (document.getElementById("f-phone").value || "").trim();
       var consent = document.getElementById("f-consent").checked;
+      var consentAd = document.getElementById("f-consent-ad").checked;
       var digits = phoneVal.replace(/\D/g, "");
 
       if (!name) { showMsg("이름을 입력해 주세요.", "error"); return; }
       if (!age) { showMsg("나이를 입력해 주세요.", "error"); return; }
       if (digits.length < 10 || digits.length > 11) { showMsg("전화번호를 정확히 입력해 주세요.", "error"); return; }
       if (!consent) { showMsg("개인정보 수집·이용에 동의해 주세요.", "error"); return; }
+      if (!consentAd) { showMsg("광고·마케팅 활용에 동의해 주세요.", "error"); return; }
 
       // 전환 이벤트 발사 (메타 CompleteRegistration + GA4 + GTM)
       trackEvent("form_submit", { location: "apply_section" });
@@ -87,19 +90,15 @@
       var submitBtn = document.getElementById("applySubmit");
       var payload = { name: name, age: age, phone: phoneVal };
 
-      // 전송 주소가 설정돼 있으면 실제 전송, 없으면 완료 메시지만 표시(초안)
+      // 전송 주소가 설정돼 있으면 구글 시트(Apps Script)로 저장. text/plain + no-cors 로 CORS 회피.
       if (CFG.FORM_ENDPOINT) {
         if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "신청 중..."; }
-        var headers = { "Content-Type": "application/json" };
-        // Supabase 함수는 anon key 인증을 요구하므로 함께 전송 (anon key는 공개 값이라 안전)
-        if (CFG.SUPABASE_ANON_KEY && CFG.SUPABASE_ANON_KEY.indexOf("여기에") !== 0) {
-          headers["apikey"] = CFG.SUPABASE_ANON_KEY;
-          headers["Authorization"] = "Bearer " + CFG.SUPABASE_ANON_KEY;
-        }
+        var body = JSON.stringify({ name: payload.name || "", age: payload.age || "", phone: payload.phone || "", page: location.href, ts: new Date().toISOString() });
         fetch(CFG.FORM_ENDPOINT, {
           method: "POST",
-          headers: headers,
-          body: JSON.stringify(payload)
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: body
         }).then(function () {
           form.reset();
           showMsg("✅ 신청이 완료되었습니다! 입력하신 번호로 사전 설문지를 보내드릴게요.", "ok");
