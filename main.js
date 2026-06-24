@@ -26,15 +26,38 @@
     reveal.forEach(function (el) { io.observe(el); });
   } else { reveal.forEach(function (el) { el.classList.add("is-visible"); }); }
 
-  /* 마퀴 카드 16장 생성 후 2배 복제(무한 루프) */
+  /* 마퀴 카드 16장 생성 후 2배 복제(무한 루프) — 익명 리뷰 한 줄 포함 */
   (function () {
     var track = document.getElementById("lookTrack");
     if (!track) return;
+    var REVIEWS = [
+      ["김*준", "어깨라인부터 달라지니까 옷이 사는 느낌이에요."],
+      ["이*호", "처음으로 거울 보는 게 즐거워졌습니다."],
+      ["박*우", "컬러 하나 바꿨을 뿐인데 인상이 확 변했어요."],
+      ["정*민", "회사에서 무슨 일 있냐는 소리 들었습니다 ㅎㅎ"],
+      ["최*석", "막연했던 스타일 고민이 한 번에 정리됐어요."],
+      ["강*현", "핏 잡는 법 배우고 나서 옷값이 아깝지 않아요."],
+      ["윤*탁", "소개팅 자리에서 자신감이 생기더라고요."],
+      ["임*규", "헤어까지 같이 봐주셔서 완성도가 다릅니다."],
+      ["한*결", "내 장점이 뭔지 처음 알게 됐어요."],
+      ["오*진", "사진 찍을 때 더 이상 피하지 않게 됐습니다."],
+      ["서*빈", "비포 애프터 보고 제가 더 놀랐어요."],
+      ["남*철", "딱 필요한 것만 짚어주셔서 효율적이었어요."],
+      ["조*영", "친구들이 스타일리스트 붙였냐고 묻습니다."],
+      ["배*훈", "어색할까 걱정했는데 정말 편하게 진행됐어요."],
+      ["문*기", "퍼스널컬러 진단 받고 쇼핑이 쉬워졌어요."],
+      ["신*우", "한 번의 디렉팅으로 방향이 완전히 잡혔습니다."]
+    ];
     function set() {
       var s = "";
       for (var i = 1; i <= 16; i++) {
-        s += '<div class="look-card"><div class="imgslot" data-label="look-' + i + '.jpg">' +
-             '<img src="images/look-' + i + '.jpg" alt="스타일 ' + i + '" onerror="this.style.display=\'none\'"></div></div>';
+        var rv = REVIEWS[i - 1];
+        s += '<div class="look-card">' +
+               '<div class="imgslot" data-label="look-' + i + '.jpg">' +
+               '<img src="images/look-' + i + '.jpg" alt="스타일 ' + i + '" onerror="this.style.display=\'none\'"></div>' +
+               '<div class="look-cap"><div class="lc-top"><span class="lc-name">' + rv[0] + '</span>' +
+               '<span class="lc-stars">★★★★★</span></div><p>' + rv[1] + '</p></div>' +
+             '</div>';
       }
       return s;
     }
