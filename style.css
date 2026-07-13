@@ -315,3 +315,20 @@ section{padding:60px 20px;}
 .sec-sub,.benefit-item b,.benefit-item p{word-break:keep-all;}
 /* 프로세스·신청 섹션도 단어 단위 줄바꿈 */
 .proc-item h3,.proc-item p,.info-notice p,.apply-note,.info-row{word-break:keep-all;}
+
+/* 킥커 뱃지 강화 — 급박함 (2026-07-13) */
+.offer-kicker{
+  background:var(--red);
+  border:none;
+  color:#fff;
+  font-size:15px;
+  font-weight:900;
+  letter-spacing:.02em;
+  padding:11px 20px;
+  box-shadow:0 4px 16px rgba(226,59,59,.4);
+  animation:ctaPulse 1.8s infinite;
+}
+@media (max-width:520px){
+  .offer-kicker{font-size:13px;padding:9px 12px;letter-spacing:0;white-space:nowrap;}
+}
+@media (prefers-reduced-motion:reduce){.offer-kicker{animation:none;}}
