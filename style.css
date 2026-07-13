@@ -76,6 +76,51 @@ section{padding:60px 20px;}
   text-decoration:none;padding:16px 36px;border-radius:999px;transition:.15s;box-shadow:0 6px 20px rgba(226,59,59,.32);}
 .hero-cta:hover{background:var(--red-deep);transform:translateY(-1px);}
 
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+/* ===== 인터랙티브 진단 카드 ===== */
+.quiz{background:var(--navy-card);border:1px solid rgba(255,255,255,.1);border-radius:18px;
+  padding:22px 18px 24px;margin:6px 0 28px;text-align:left;box-shadow:0 12px 34px rgba(0,0,0,.4);}
+.quiz-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;}
+.quiz-kicker{font-size:12.5px;font-weight:800;letter-spacing:.06em;color:var(--lime);}
+.quiz-progress{display:flex;gap:6px;flex:0 0 auto;}
+.qp-step{width:24px;height:5px;border-radius:3px;background:rgba(255,255,255,.16);transition:background .3s;}
+.qp-step.active{background:var(--lime);}
+.quiz-body{position:relative;}
+.quiz-step{display:none;}
+.quiz-step.is-active{display:block;animation:quizIn .35s cubic-bezier(.16,1,.3,1);}
+@keyframes quizIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.quiz-q{font-size:22px;font-weight:900;line-height:1.42;margin-bottom:18px;word-break:keep-all;letter-spacing:-0.01em;}
+.quiz-opts{display:flex;flex-direction:column;gap:10px;}
+.quiz-opt{display:block;width:100%;text-align:left;background:rgba(255,255,255,.04);
+  border:1.5px solid rgba(255,255,255,.14);color:var(--white);font-family:inherit;font-size:16.5px;font-weight:700;
+  padding:16px 18px;border-radius:12px;cursor:pointer;transition:.15s;line-height:1.35;word-break:keep-all;}
+.quiz-opt:hover,.quiz-opt:focus-visible{border-color:var(--lime);background:rgba(205,213,221,.1);transform:translateY(-1px);outline:none;}
+.quiz-opt:active{transform:scale(.99);}
+.quiz-back{margin-top:16px;background:none;border:none;color:var(--muted);font-family:inherit;font-size:13.5px;cursor:pointer;padding:4px 2px;}
+.quiz-back:hover{color:var(--white);}
+
+/* 결과 화면 */
+.qr-eyebrow{font-size:12.5px;font-weight:800;letter-spacing:.1em;color:var(--lime);margin-bottom:12px;}
+.qr-head{font-size:22px;font-weight:900;line-height:1.45;word-break:keep-all;margin-bottom:14px;letter-spacing:-0.01em;}
+.qr-head em{font-style:normal;background:var(--lime);color:var(--navy);padding:1px 7px;border-radius:3px;}
+.qr-pain{font-size:15.5px;line-height:1.72;color:#c4ccd4;margin-bottom:18px;word-break:keep-all;}
+.qr-fear{background:rgba(226,59,59,.1);border:1px solid rgba(226,59,59,.4);border-radius:12px;
+  padding:14px 16px;font-size:15.5px;line-height:1.6;color:#f0d3d3;margin-bottom:14px;word-break:keep-all;}
+.qr-fear b{color:#ff6a6a;font-weight:800;}
+.qr-photo{background:rgba(205,213,221,.08);border:1px solid rgba(205,213,221,.3);border-radius:12px;
+  padding:13px 15px;font-size:14.5px;line-height:1.62;color:#dfe4ea;margin-bottom:16px;word-break:keep-all;}
+.qr-photo b{color:#fff;font-weight:800;}
+.qr-social{text-align:center;font-size:14px;color:var(--muted);margin-bottom:14px;}
+.qr-social b{color:var(--white);font-weight:800;}
+.qr-cta{display:block;text-align:center;background:var(--red);color:#fff;font-weight:900;font-size:18px;
+  text-decoration:none;padding:18px;border-radius:12px;box-shadow:0 6px 22px rgba(226,59,59,.32);transition:.15s;}
+.qr-cta:hover{background:var(--red-deep);transform:translateY(-1px);}
+.qr-note{text-align:center;font-size:12.5px;color:var(--muted);margin-top:11px;}
+.qr-restart{display:block;margin:12px auto 0;background:none;border:none;color:var(--muted);
+  font-family:inherit;font-size:12.5px;cursor:pointer;text-decoration:underline;text-underline-offset:2px;}
+.qr-restart:hover{color:var(--white);}
+
 /* ===== 2. 카톡 후기 (작게 — 존재만 확인) ===== */
 .kakao-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:30px;align-items:start;}
 .kakao-grid .imgslot{border-radius:12px;border:1px solid rgba(255,255,255,.1);background:#1f2226;
@@ -167,6 +212,7 @@ section{padding:60px 20px;}
 /* 모바일 */
 @media (max-width:520px){
   .hero-title{font-size:25px;} .sec-title{font-size:24px;}
+  .quiz-q,.qr-head{font-size:20px;} .quiz-opt{font-size:16px;padding:15px 16px;}
   .proc-grid{grid-template-columns:1fr;}
   .rv-item{grid-template-columns:120px 1fr;} .sol-item{grid-template-columns:96px 1fr;}
   .look-card{width:150px;}
@@ -175,3 +221,97 @@ section{padding:60px 20px;}
   .sticky-cta__btn{font-size:18px;padding:16px;width:100%;text-align:center;}
 }
 @media (prefers-reduced-motion:reduce){.sticky-cta__btn{animation:none;}}
+
+/* ===== discount50 전용 — 시크릿 50% 오퍼 카드 ===== */
+.offer{background:var(--navy-card);border:1px solid rgba(226,59,59,.5);border-radius:18px;
+  padding:24px 20px 26px;margin:6px 0 28px;text-align:center;box-shadow:0 12px 34px rgba(0,0,0,.4);}
+.offer-kicker{display:inline-block;background:rgba(226,59,59,.14);border:1px solid rgba(226,59,59,.45);
+  color:#ff8a8a;font-size:12.5px;font-weight:800;letter-spacing:.04em;padding:7px 14px;border-radius:999px;margin-bottom:16px;}
+.offer-name{font-size:20px;font-weight:900;color:var(--white);margin-bottom:10px;}
+.offer-price{display:flex;align-items:baseline;justify-content:center;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
+.price-strike{font-size:18px;color:var(--muted);text-decoration:line-through;}
+.price-off{font-size:14px;font-weight:900;background:var(--red);color:#fff;padding:3px 9px;border-radius:6px;align-self:center;}
+.price-now{font-size:34px;font-weight:900;color:var(--lime);letter-spacing:-0.02em;}
+.countdown-box{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12);border-radius:12px;
+  padding:12px 16px;font-size:15px;color:var(--muted);margin-bottom:14px;}
+.countdown-time{font-variant-numeric:tabular-nums;font-size:22px;font-weight:900;color:#ff6a6a;margin-left:6px;letter-spacing:.04em;}
+.seats{margin-bottom:18px;}
+.seats-bar{height:10px;border-radius:5px;background:rgba(255,255,255,.12);overflow:hidden;margin-bottom:8px;}
+.seats-fill{height:100%;width:0;border-radius:5px;background:linear-gradient(90deg,var(--red),#ff7a4d);transition:width 1s ease;}
+.seats-text{font-size:13.5px;color:var(--muted);}
+.seats-text b{color:var(--white);font-weight:900;font-size:15px;}
+.offer-cta{display:block;text-align:center;background:var(--red);color:#fff;font-weight:900;font-size:18px;
+  text-decoration:none;padding:18px;border-radius:12px;box-shadow:0 6px 22px rgba(226,59,59,.32);transition:.15s;}
+.offer-cta:hover{background:var(--red-deep);transform:translateY(-1px);}
+.offer-note{font-size:12.5px;color:var(--muted);margin-top:12px;line-height:1.6;}
+.offer-note b{color:var(--lime);font-weight:800;}
+
+/* 혜택 리스트 */
+.benefit-list{max-width:520px;margin:30px auto 0;display:flex;flex-direction:column;gap:12px;}
+.benefit-item{display:flex;gap:14px;align-items:flex-start;background:var(--navy-card);border:1px solid rgba(255,255,255,.09);
+  border-radius:14px;padding:16px 18px;text-align:left;}
+.benefit-check{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--lime);color:var(--navy);
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;margin-top:2px;}
+.benefit-item b{font-size:16.5px;font-weight:900;color:var(--white);display:block;margin-bottom:3px;}
+.benefit-item p{font-size:13.5px;color:#b4bcc5;line-height:1.55;}
+
+/* 고정 CTA 타이머 */
+.sticky-cta__text .countdown-time{font-size:19px;}
+@media (max-width:520px){
+  .price-now{font-size:29px;}
+  .offer-kicker{font-size:11.5px;}
+  .sticky-cta__text .countdown-time{font-size:16px;}
+}
+.sticky-cta__text{word-break:keep-all;}
+.sticky-cta__text .countdown-time{white-space:nowrap;}
+
+/* ===== 오퍼 카드 내 플랜 2종 ===== */
+.offer-plans{display:flex;flex-direction:column;gap:10px;margin-bottom:14px;}
+.offer-plan{position:relative;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);
+  border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;text-align:left;}
+.offer-plan.hot{border-color:rgba(226,59,59,.55);background:rgba(226,59,59,.07);}
+.op-badge{position:absolute;top:-10px;right:12px;font-size:10.5px;font-weight:900;padding:3px 10px;border-radius:999px;
+  background:var(--red);color:#fff;box-shadow:0 2px 8px rgba(226,59,59,.4);}
+.op-name{font-size:15px;font-weight:800;color:var(--white);}
+.op-name span{font-size:12px;font-weight:700;color:var(--muted);margin-left:5px;}
+.op-price{font-size:13.5px;color:var(--muted);white-space:nowrap;}
+.op-price s{opacity:.75;margin-right:7px;}
+.op-price b{font-size:18px;font-weight:900;color:var(--lime);}
+.offer-pick{font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.6;}
+.offer-pick b{color:#ff8a8a;font-weight:900;}
+
+/* ===== 플랜 비교 카드 ===== */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:640px;margin:30px auto 0;}
+.compare-card{position:relative;background:var(--navy-card);border:1px solid rgba(255,255,255,.12);border-radius:16px;
+  padding:22px 18px 20px;text-align:left;}
+.compare-card.hot{border:1.5px solid rgba(226,59,59,.6);box-shadow:0 8px 28px rgba(226,59,59,.12);}
+.cc-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:11px;font-weight:900;
+  padding:4px 13px;border-radius:999px;background:var(--red);color:#fff;box-shadow:0 2px 8px rgba(226,59,59,.4);}
+.cc-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:10px;}
+.cc-name{font-size:16.5px;font-weight:900;color:var(--white);}
+.cc-time{font-size:12px;font-weight:700;color:var(--muted);}
+.cc-price{margin-bottom:14px;}
+.cc-price s{font-size:13.5px;color:var(--muted);margin-right:8px;}
+.cc-price b{font-size:24px;font-weight:900;color:var(--lime);}
+.cc-list{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.cc-list li{font-size:13.5px;line-height:1.5;color:#b4bcc5;padding-left:18px;position:relative;}
+.cc-list li::before{content:"✔";position:absolute;left:0;color:var(--lime);font-size:11px;}
+.cc-list li b{color:var(--lime);font-weight:800;}
+@media (max-width:520px){
+  .compare-grid{grid-template-columns:1fr;gap:18px;}
+  .op-price b{font-size:16.5px;}
+}
+
+/* 히어로 타이틀 행간 확대 (2026-07-13) */
+.hero-title{line-height:1.6;}
+/* 상단 오퍼(킥커+카운트다운+CTA만) — 슬림 버전 */
+.offer-top{padding:20px 18px 22px;margin:2px 0 26px;}
+.offer-top .countdown-box{margin-bottom:16px;}
+/* 타이틀 "반값 쿠폰을 드립니다" 한 덩어리 유지 (고아 줄바꿈 방지) */
+.hero-title .nobr{white-space:nowrap;}
+/* 오퍼 안내문 — 단어 단위 줄바꿈(음절 끊김 방지) */
+.offer-note{word-break:keep-all;}
+/* 부제·카드 텍스트도 단어 단위 줄바꿈 */
+.sec-sub,.benefit-item b,.benefit-item p{word-break:keep-all;}
+/* 프로세스·신청 섹션도 단어 단위 줄바꿈 */
+.proc-item h3,.proc-item p,.info-notice p,.apply-note,.info-row{word-break:keep-all;}

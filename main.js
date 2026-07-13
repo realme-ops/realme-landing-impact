@@ -1,8 +1,14 @@
 (function () {
   "use strict";
-  var CFG = window.REALME_CONFIG || {};
 
-  /* 통합 이벤트: GA4(gtag) + 메타픽셀(fbq). 폼 제출=Lead, 상단 버튼=커스텀 */
+  /* ★★★ 운영 설정 — 여기만 수정하면 됨 ★★★ */
+  // discount50 전용 타입폼 (2026-07-11 생성, impact-me용 nY7F5abi 와 별도)
+  var TYPEFORM = "https://artin1ife.typeform.com/to/NN0cEjOV";
+  var SEATS_TOTAL = 100;
+  var SEATS_LEFT = 41;              // ★ 남은 자리 — 수동으로 조정
+  var COUNTDOWN_HOURS = 72;         // 방문자별 72시간 카운트다운
+
+  /* 통합 이벤트: GA4(gtag) + 메타픽셀(fbq) */
   function trackEvent(name, params) {
     params = params || {};
     try { (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: name }, params)); } catch (e) {}
@@ -26,7 +32,70 @@
     reveal.forEach(function (el) { io.observe(el); });
   } else { reveal.forEach(function (el) { el.classList.add("is-visible"); }); }
 
-  /* 마퀴 카드 16장 생성 후 2배 복제(무한 루프) — 익명 리뷰 한 줄 포함 */
+  /* ===== 72시간 카운트다운 (방문자별 · localStorage, 만료 시 새 72시간) ===== */
+  (function () {
+    var els = document.querySelectorAll("[data-countdown]");
+    if (!els.length) return;
+    var KEY = "d50_deadline";
+    var DUR = COUNTDOWN_HOURS * 3600 * 1000;
+    var end = parseInt(localStorage.getItem(KEY) || "0", 10);
+    if (!end || end - Date.now() > DUR) end = 0;
+    if (!end) { end = Date.now() + DUR; try { localStorage.setItem(KEY, String(end)); } catch (e) {} }
+    function pad(n) { return (n < 10 ? "0" : "") + n; }
+    function tick() {
+      var left = end - Date.now();
+      if (left <= 0) {
+        end = Date.now() + DUR;
+        try { localStorage.setItem(KEY, String(end)); } catch (e) {}
+        left = DUR;
+      }
+      var h = Math.floor(left / 3600000), m = Math.floor(left % 3600000 / 60000), s = Math.floor(left % 60000 / 1000);
+      var txt = pad(h) + ":" + pad(m) + ":" + pad(s);
+      els.forEach(function (el) { el.textContent = txt; });
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  /* ===== 남은 자리 표시 ===== */
+  (function () {
+    var leftEl = document.getElementById("seatsLeft");
+    var fillEl = document.getElementById("seatsFill");
+    if (leftEl) leftEl.textContent = SEATS_LEFT;
+    if (fillEl) fillEl.style.width = Math.round((SEATS_TOTAL - SEATS_LEFT) / SEATS_TOTAL * 100) + "%";
+  })();
+
+  /* 타입폼 URL 빌더 — 랜딩 UTM/클릭ID 전달 (impact-me와 동일한 검증된 방식) */
+  var FORWARD_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid", "gclid"];
+  function buildTypeformUrl() {
+    var src = new URLSearchParams(location.search), parts = [];
+    FORWARD_KEYS.forEach(function (k) {
+      var v = src.get(k); if (v) parts.push(encodeURIComponent(k) + "=" + encodeURIComponent(v));
+    });
+    return TYPEFORM + (parts.length ? "?" + parts.join("&") : "");
+  }
+
+  /* 모든 CTA → 타입폼 이동 + 퍼널용 cta_click 발사 */
+  (function () {
+    var placeholder = TYPEFORM.indexOf("XXXXXXXX") !== -1;
+    var url = buildTypeformUrl();
+    document.querySelectorAll(".js-typeform").forEach(function (a) {
+      if (!placeholder) a.setAttribute("href", url);
+      a.addEventListener("click", function (e) {
+        // 전환(Lead)은 타입폼 완료 시 발사. 랜딩에선 퍼널용 cta_click만.
+        trackEvent("cta_click", { location: a.getAttribute("data-cta") || "cta", label: (a.textContent || "").trim() });
+        if (placeholder) {
+          e.preventDefault();
+          console.warn("[discount50] TYPEFORM URL이 아직 플레이스홀더입니다. main.js 상단에서 교체하세요.");
+          var orig = a.textContent;
+          a.textContent = "신청 페이지 준비 중입니다";
+          setTimeout(function () { a.textContent = orig; }, 1800);
+        }
+      });
+    });
+  })();
+
+  /* 마퀴 카드 16장 생성 후 2배 복제(무한 루프) */
   (function () {
     var track = document.getElementById("lookTrack");
     if (!track) return;
@@ -83,22 +152,5 @@
     track.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; stop(); }, { passive: true });
     track.addEventListener("touchend", function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) { dx < 0 ? next() : go(cur - 1); } x0 = null; start(); }, { passive: true });
     start();
-  })();
-
-  /* 모든 CTA → 타입폼 이동 (랜딩 UTM 그대로 전달) + 전환(Lead) 발사 */
-  (function () {
-    var TYPEFORM = "https://artin1ife.typeform.com/to/nY7F5abi";
-    var src = new URLSearchParams(location.search), parts = [];
-    ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid", "gclid"].forEach(function (k) {
-      var v = src.get(k); if (v) parts.push(encodeURIComponent(k) + "=" + encodeURIComponent(v));
-    });
-    var url = TYPEFORM + (parts.length ? "?" + parts.join("&") : "");
-    document.querySelectorAll(".js-typeform").forEach(function (a) {
-      a.setAttribute("href", url);
-      a.addEventListener("click", function () {
-        // 전환(Lead)은 타입폼 완료 시 발사. 랜딩에선 퍼널용 cta_click만.
-        trackEvent("cta_click", { location: a.getAttribute("data-cta") || "cta", label: (a.textContent || "").trim() });
-      });
-    });
   })();
 })();
