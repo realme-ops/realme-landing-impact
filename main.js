@@ -4,9 +4,15 @@
   /* ★★★ 운영 설정 — 여기만 수정하면 됨 ★★★ */
   // discount50 전용 타입폼 (2026-07-11 생성, impact-me용 nY7F5abi 와 별도)
   var TYPEFORM = "https://artin1ife.typeform.com/to/NN0cEjOV";
+
+  // 남은 쿠폰 연출: 시작값에서 보는 동안 실시간으로 1~2장씩 감소 (재방문 시 이어짐, 바닥값에서 정지)
   var SEATS_TOTAL = 100;
-  var SEATS_LEFT = 41;              // ★ 남은 자리 — 수동으로 조정
-  var COUNTDOWN_HOURS = 72;         // 방문자별 72시간 카운트다운
+  var SEATS_START = 63;             // ★ 시작 장수 — 캠페인 리셋 시 여기만 조정
+  var SEATS_FLOOR = 21;             // ★ 이 밑으로는 안 내려감
+
+  // 실시간 시청자 연출 (플로팅 배지)
+  var VIEWERS_MIN = 3600;
+  var VIEWERS_MAX = 4800;
 
   /* 통합 이벤트: GA4(gtag) + 메타픽셀(fbq) */
   function trackEvent(name, params) {
@@ -32,37 +38,67 @@
     reveal.forEach(function (el) { io.observe(el); });
   } else { reveal.forEach(function (el) { el.classList.add("is-visible"); }); }
 
-  /* ===== 72시간 카운트다운 (방문자별 · localStorage, 만료 시 새 72시간) ===== */
+  /* ===== 남은 쿠폰 실시간 감소 연출 =====
+     - 시작값(SEATS_START)에서 12~35초 간격으로 1~2장씩 감소
+     - localStorage로 재방문 시 이어짐 (숫자가 다시 늘어나 보이는 일 없음)
+     - SEATS_FLOOR에서 정지 */
   (function () {
-    var els = document.querySelectorAll("[data-countdown]");
+    var els = document.querySelectorAll(".seats-left-text");
     if (!els.length) return;
-    var KEY = "d50_deadline";
-    var DUR = COUNTDOWN_HOURS * 3600 * 1000;
-    var end = parseInt(localStorage.getItem(KEY) || "0", 10);
-    if (!end || end - Date.now() > DUR) end = 0;
-    if (!end) { end = Date.now() + DUR; try { localStorage.setItem(KEY, String(end)); } catch (e) {} }
-    function pad(n) { return (n < 10 ? "0" : "") + n; }
-    function tick() {
-      var left = end - Date.now();
-      if (left <= 0) {
-        end = Date.now() + DUR;
-        try { localStorage.setItem(KEY, String(end)); } catch (e) {}
-        left = DUR;
-      }
-      var h = Math.floor(left / 3600000), m = Math.floor(left % 3600000 / 60000), s = Math.floor(left % 60000 / 1000);
-      var txt = pad(h) + ":" + pad(m) + ":" + pad(s);
-      els.forEach(function (el) { el.textContent = txt; });
+    var KEY = "d50_seats";
+    var val = parseInt(localStorage.getItem(KEY) || "0", 10);
+    if (!val || val > SEATS_START || val < SEATS_FLOOR) val = SEATS_START;
+
+    function render(flash) {
+      els.forEach(function (el) {
+        el.textContent = val;
+        if (flash) {
+          el.classList.remove("seat-drop");
+          void el.offsetWidth; // 애니메이션 재시작
+          el.classList.add("seat-drop");
+        }
+      });
+      document.querySelectorAll(".seats-fill").forEach(function (f) {
+        // 게이지 = "남은" 비율 — 쿠폰이 줄면 바도 같이 줄어듦
+        f.style.width = Math.round(val / SEATS_TOTAL * 100) + "%";
+        if (flash) {
+          f.classList.remove("bar-flash");
+          void f.offsetWidth;
+          f.classList.add("bar-flash");
+        }
+      });
     }
-    tick();
-    setInterval(tick, 1000);
+    function save() { try { localStorage.setItem(KEY, String(val)); } catch (e) {} }
+    function schedule() { setTimeout(tick, 9000 + Math.random() * 14000); } // 9~23초 간격
+    function tick() {
+      if (val > SEATS_FLOOR) {
+        val -= (Math.random() < 0.25 ? 2 : 1);
+        if (val < SEATS_FLOOR) val = SEATS_FLOOR;
+        save();
+        render(true);
+      }
+      schedule();
+    }
+    render(false);
+    save();
+    // 첫 감소는 진입 5초 이내 — 들어오자마자 "방금 누가 받아갔다"는 인상
+    setTimeout(tick, 2500 + Math.random() * 2000);
   })();
 
-  /* ===== 남은 자리 표시 ===== */
+  /* ===== 실시간 시청자 플로팅 배지 (숫자 랜덤워크) ===== */
   (function () {
-    var leftEl = document.getElementById("seatsLeft");
-    var fillEl = document.getElementById("seatsFill");
-    if (leftEl) leftEl.textContent = SEATS_LEFT;
-    if (fillEl) fillEl.style.width = Math.round((SEATS_TOTAL - SEATS_LEFT) / SEATS_TOTAL * 100) + "%";
+    var el = document.getElementById("viewerCount");
+    if (!el) return;
+    var v = 3950 + Math.floor(Math.random() * 320);
+    function render() { el.textContent = v.toLocaleString("ko-KR"); }
+    function tick() {
+      var delta = Math.floor(Math.random() * 29) - 13; // -13 ~ +15 (살짝 증가 편향)
+      v = Math.max(VIEWERS_MIN, Math.min(VIEWERS_MAX, v + delta));
+      render();
+      setTimeout(tick, 3500 + Math.random() * 5000);
+    }
+    render();
+    setTimeout(tick, 2500);
   })();
 
   /* 타입폼 URL 빌더 — 랜딩 UTM/클릭ID 전달 (impact-me와 동일한 검증된 방식) */

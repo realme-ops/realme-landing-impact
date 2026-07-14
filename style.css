@@ -332,3 +332,44 @@ section{padding:60px 20px;}
   .offer-kicker{font-size:13px;padding:9px 12px;letter-spacing:0;white-space:nowrap;}
 }
 @media (prefers-reduced-motion:reduce){.offer-kicker{animation:none;}}
+
+/* ===== 실시간 시청자 플로팅 배지 (2026-07-14) ===== */
+.live-viewers{
+  position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:400;
+  display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+  background:rgba(13,14,16,.92);border:1px solid rgba(226,59,59,.55);
+  color:#eef1f4;font-size:12.5px;font-weight:700;padding:8px 15px;border-radius:999px;
+  box-shadow:0 4px 18px rgba(0,0,0,.5);backdrop-filter:blur(6px);
+}
+.live-viewers b{color:#ff8a8a;font-weight:900;font-variant-numeric:tabular-nums;margin:0 1px;}
+.lv-dot{width:8px;height:8px;border-radius:50%;background:#ff4747;flex:0 0 auto;animation:lvBlink 1.2s infinite;}
+@keyframes lvBlink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,71,71,.55);}50%{opacity:.5;box-shadow:0 0 0 6px rgba(255,71,71,0);}}
+
+/* 쿠폰 감소 플래시 — 강하게 번쩍 */
+.seats-left-text{display:inline-block;}
+.seat-drop{animation:seatDrop .9s cubic-bezier(.2,1.4,.4,1);}
+@keyframes seatDrop{
+  0%{transform:scale(1);}
+  35%{transform:scale(1.8);color:#ff4747;text-shadow:0 0 14px rgba(255,71,71,.95),0 0 30px rgba(255,71,71,.5);}
+  70%{transform:scale(.95);color:#ff6a6a;}
+  100%{transform:scale(1);}
+}
+.bar-flash{animation:barFlash .9s ease;}
+@keyframes barFlash{
+  0%{filter:brightness(1);}
+  35%{filter:brightness(2.1);box-shadow:0 0 16px rgba(255,90,50,.95);}
+  100%{filter:brightness(1);}
+}
+
+/* 고정 바 남은 쿠폰 숫자 강조 */
+.sticky-cta__text b{color:#ff6a6a;font-weight:900;font-size:19px;font-variant-numeric:tabular-nums;}
+@media (max-width:520px){
+  .sticky-cta__text b{font-size:17px;}
+  .live-viewers{font-size:11.5px;padding:7px 12px;}
+}
+
+/* 오퍼 플랜 3줄 구성 설명 (2026-07-14) */
+.op-desc{flex-basis:100%;list-style:none;margin-top:9px;padding-top:9px;border-top:1px dashed rgba(255,255,255,.12);
+  display:flex;flex-direction:column;gap:4px;text-align:left;}
+.op-desc li{font-size:12.5px;line-height:1.5;color:var(--muted);word-break:keep-all;padding-left:16px;position:relative;}
+.op-desc li::before{content:"✔";position:absolute;left:0;color:var(--lime);font-size:10px;}
