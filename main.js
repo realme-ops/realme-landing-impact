@@ -105,8 +105,11 @@
   var FORWARD_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid", "gclid"];
   function buildTypeformUrl() {
     var src = new URLSearchParams(location.search), parts = [];
+    // 히어로 A/B 구분: /style(.html)=얼굴, 그 외(index)=좋은분 → utm_source로 타입폼에 전달 → 시트 '랜딩' 열에 기록
+    var hero = /\/style(?:\.html)?(?:$|[?#])/i.test(location.pathname) ? "얼굴" : "좋은분";
     FORWARD_KEYS.forEach(function (k) {
-      var v = src.get(k); if (v) parts.push(encodeURIComponent(k) + "=" + encodeURIComponent(v));
+      var v = (k === "utm_source") ? hero : src.get(k);
+      if (v) parts.push(encodeURIComponent(k) + "=" + encodeURIComponent(v));
     });
     return TYPEFORM + (parts.length ? "?" + parts.join("&") : "");
   }
