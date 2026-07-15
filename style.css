@@ -206,7 +206,7 @@ section{padding:60px 20px;}
 .sticky-cta__text b{color:#e8edf2;font-weight:800;}
 @keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(226,59,59,.55);}50%{box-shadow:0 0 0 12px rgba(226,59,59,0);}}
 .sticky-cta__btn{flex:0 0 auto;background:var(--red);color:#fff;font-weight:900;font-size:24px;text-decoration:none;
-  padding:20px 50px;border-radius:999px;white-space:nowrap;animation:ctaPulse 1.8s infinite;transition:.15s;}
+  padding:20px 50px;border-radius:999px;white-space:nowrap;transition:.15s;}
 .sticky-cta__btn:hover{background:var(--red-deep);transform:translateY(-1px);}
 
 /* 모바일 */
@@ -326,7 +326,6 @@ section{padding:60px 20px;}
   letter-spacing:.02em;
   padding:11px 20px;
   box-shadow:0 4px 16px rgba(226,59,59,.4);
-  animation:ctaPulse 1.8s infinite;
 }
 @media (max-width:520px){
   .offer-kicker{font-size:13px;padding:9px 12px;letter-spacing:0;white-space:nowrap;}
@@ -342,22 +341,21 @@ section{padding:60px 20px;}
   box-shadow:0 4px 18px rgba(0,0,0,.5);backdrop-filter:blur(6px);
 }
 .live-viewers b{color:#ff8a8a;font-weight:900;font-variant-numeric:tabular-nums;margin:0 1px;}
-.lv-dot{width:8px;height:8px;border-radius:50%;background:#ff4747;flex:0 0 auto;animation:lvBlink 1.2s infinite;}
-@keyframes lvBlink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,71,71,.55);}50%{opacity:.5;box-shadow:0 0 0 6px rgba(255,71,71,0);}}
+.lv-dot{width:8px;height:8px;border-radius:50%;background:#ff4747;flex:0 0 auto;animation:lvBlink 2.4s ease-in-out infinite;}
+@keyframes lvBlink{0%,100%{opacity:1;}50%{opacity:.55;}}
 
 /* 쿠폰 감소 플래시 — 강하게 번쩍 */
 .seats-left-text{display:inline-block;}
-.seat-drop{animation:seatDrop .9s cubic-bezier(.2,1.4,.4,1);}
+.seat-drop{animation:seatDrop .5s ease;}
 @keyframes seatDrop{
   0%{transform:scale(1);}
-  35%{transform:scale(1.8);color:#ff4747;text-shadow:0 0 14px rgba(255,71,71,.95),0 0 30px rgba(255,71,71,.5);}
-  70%{transform:scale(.95);color:#ff6a6a;}
+  40%{transform:scale(1.15);color:#ff6a6a;}
   100%{transform:scale(1);}
 }
-.bar-flash{animation:barFlash .9s ease;}
+.bar-flash{animation:barFlash .5s ease;}
 @keyframes barFlash{
   0%{filter:brightness(1);}
-  35%{filter:brightness(2.1);box-shadow:0 0 16px rgba(255,90,50,.95);}
+  40%{filter:brightness(1.25);}
   100%{filter:brightness(1);}
 }
 
@@ -373,3 +371,9 @@ section{padding:60px 20px;}
   display:flex;flex-direction:column;gap:4px;text-align:left;}
 .op-desc li{font-size:12.5px;line-height:1.5;color:var(--muted);word-break:keep-all;padding-left:16px;position:relative;}
 .op-desc li::before{content:"✔";position:absolute;left:0;color:var(--lime);font-size:10px;}
+
+/* 히어로 아이브로우 + 오퍼 "무엇이 반값" 한 줄 (2026-07-14) */
+.hero-eyebrow{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--lime);margin-bottom:12px;text-align:center;word-break:keep-all;}
+.offer-what{font-size:13.5px;color:#c4ccd4;line-height:1.65;margin:-4px 0 14px;word-break:keep-all;}
+.offer-what b{color:var(--lime);font-weight:800;}
+@media (max-width:520px){.hero-eyebrow{font-size:12px;}}
