@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>리얼미 — 선착순 100명 첫 방문 50% 특별 혜택</title>
+<title>리얼미 · 선착순 100명 첫 방문 50% 특별 혜택</title>
 <meta name="description" content="남성 이미지 컨설팅 리얼미, 선착순 100명 한정 첫 방문 50% 특별 혜택. 파인딩·원데이 플랜 중 원하는 곳에 사용. 선착순 소진 시 종료되는 시크릿 프로모션." />
 
 <meta property="og:type" content="website" />
-<meta property="og:title" content="리얼미 — 선착순 100명 첫 방문 50% 특별 혜택" />
-<meta property="og:description" content="남성 이미지 컨설팅 리얼미 — 선착순 100명 한정 첫 방문 50% 특별 혜택. 소진되면 예고 없이 종료됩니다." />
+<meta property="og:title" content="리얼미 · 선착순 100명 첫 방문 50% 특별 혜택" />
+<meta property="og:description" content="남성 이미지 컨설팅 리얼미, 선착순 100명 한정 첫 방문 50% 특별 혜택. 소진되면 예고 없이 종료됩니다." />
 <meta property="og:url" content="https://impact-me.real-me.co.kr" />
 
-<!-- 트래킹 ID (GTM 미사용 — 단일 캠페인 랜딩) -->
+<!-- 트래킹 ID (GTM 미사용, 단일 캠페인 랜딩) -->
 <script>
   window.REALME_CONFIG = {
     GA4_ID:        "G-TYWS49LKCM",
@@ -39,29 +39,36 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:wght@500;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css?v=20260715a" />
+<link rel="stylesheet" href="style-ink.css?v=20260722a" />
 </head>
 <body>
+<!-- ============================================================
+     ✏️  텍스트 수정 가이드 (읽고 지우지 마세요)
+     ------------------------------------------------------------
+     · 고쳐도 되는 것 : > 와 < 사이의 한글 글자
+         예)  <h2 class="sec-title">여기 제목만 고치기</h2>
+              <p>여기 설명 문장만 고치기</p>
+     · 절대 건드리면 안 되는 것 : < > 안의 영어/기호 (태그·class·href 등)
+     · <em>초록 강조</em>  ·  <b>진한 강조</b>  ·  <br> 는 줄바꿈
+     · 섹션은 아래 번호 주석으로 찾기 :
+         1히어로 2문제공감 3왜안됐나 4서비스상세 5왜리얼미
+         5.5쇼룸갤러리 6카톡후기 7마퀴 8실제후기
+         9플랜·가격 10FAQ 11최종CTA
+     · 저장(Ctrl+S) → 브라우저 새로고침(F5) 하면 바로 반영
+     ============================================================ -->
 <main class="landing">
 
-  <!-- ===== 1. 히어로 + 오퍼 카드 ===== -->
+  <!-- ===== 1. 히어로 (훅 + 비포/애프터) ===== -->
   <section class="hero" data-reveal>
     <div class="nav-row">STYLING<img class="brand-logo" src="images/logo-white.png" alt="REAL ME">PERSONAL</div>
 
     <div class="hero-eyebrow">남성 이미지 컨설팅 · REAL ME</div>
-    <h1 class="hero-title">"좋은 분인데, 스타일이 좀..."<br><em>주선자한테 전해 들은 그 말.</em></h1>
-    <p class="hero-sub"><span style="display:block;font-size:15px;line-height:1.35;margin-bottom:14px;">제일 빠른 변화는 <b>스타일</b>입니다.</span>리얼미는 한 번의 변신이 아니라,<br><b>다음에도 유지되는 기준</b>을 잡아드립니다.</p>
+    <h1 class="hero-title">얼굴은 그대로인데<br><em>애프터가 쏟아지기 시작한 남자들</em><br>대체 뭘 바꿨을까요?</h1>
+    <p class="hero-sub"><span style="display:block;font-size:15px;line-height:1.35;margin-bottom:14px;">대화도, 성형도 아니에요.</span>리얼미는 한 번의 사진, 한 번의 변신이 아니라<br><b>스스로 유지하는 모습</b>을 만듭니다.</p>
 
-    <!-- ===== 상단 오퍼 (킥커 + 카운트다운 + CTA) ===== -->
-    <div class="offer offer-top">
-      <div class="offer-kicker">선착순 100명 한정 · 첫 방문 50% 특별 혜택</div>
-      <p class="offer-what">얼굴형·체형 진단부터 1:1 스타일 디렉팅까지<br><b>파인딩·원데이 전 플랜 50%</b></p>
-      <div class="seats">
-        <div class="seats-bar"><div class="seats-fill"></div></div>
-        <div class="seats-text">남은 자리 <b class="seats-left-text">-</b>명 / 100명</div>
-      </div>
-      <a href="#" class="offer-cta js-typeform" data-cta="offer-top">첫 방문 50% 혜택 신청하러 가기 →</a>
-    </div>
+    <!-- 상단 오퍼/CTA 제거 (2026-07-21 개편): 첫 화면은 훅+비포애프터로 스크롤 유도.
+         오퍼·CTA는 아래 섹션 + 스크롤 뎁스별 sticky 버튼이 담당. -->
+    <div class="hero-hint" aria-hidden="true">↓ 어떻게 바뀌는지 직접 보세요</div>
 
     <div class="slider">
       <div class="slider-view">
@@ -82,8 +89,245 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
     </div>
 
     <p class="slider-caption">* 리얼미 솔루션을 직접 경험한 실제 비포/애프터 사례입니다.</p>
+    <a href="#plans" class="hero-offer-pill">🔥 선착순 100명 · 첫 방문 <b>50%</b> 혜택 <span class="hop-go">가격 보기 ↓</span></a>
+  </section>
 
-    <!-- ===== 플랜 + 남은 쿠폰 오퍼 카드 ===== -->
+  <!-- ===== 2. 문제 공감 (Pain) ===== -->
+  <section class="pain" data-reveal>
+    <div class="eyebrow">READY TO CHANGE</div>
+    <h2 class="sec-title">혹시 비포 사진에서<br><em>내 모습이 보이나요?</em></h2>
+    <div class="pain-list">
+      <div class="pain-card"><span class="pain-no">01</span><p>내면이 중요하지, 외면이 크게 중요한가요?</p></div>
+      <div class="pain-card"><span class="pain-no">02</span><p>남자는 꾸미는 거 아니라던데요?</p></div>
+      <div class="pain-card"><span class="pain-no">03</span><p>옷을 잘 못 입어서 츄리닝, 검은 반바지, 회색 티만 입어요.</p></div>
+      <div class="pain-card"><span class="pain-no">04</span><p>관심은 있긴 한데... 혹시 돈만 날리면 어쩌나 걱정돼요.</p></div>
+    </div>
+    <p class="pain-close">모두 리얼미를 만나기 전,<br><em>고객분들의 걱정</em>이었어요.</p>
+  </section>
+
+  <!-- ===== 3. 그동안 왜 안 됐을까 (기존 방법의 한계) ===== -->
+  <section class="whyfail" data-reveal>
+    <div class="eyebrow">WHY IT DIDN'T WORK</div>
+    <h2 class="sec-title"> 여러 도전이 성공하지 못했던 건,<br><em>나에게 맞는 방법</em>이<br> 아니었기 때문이죠</h2>
+    <p class="sec-sub">그동안 시도했던 방법들이 왜 오래가지 못했을까요?</p>
+    <div class="whyfail-list">
+      <div class="whyfail-card">
+        <div class="wf-head"><span class="wf-x">✕</span><b>유튜브 · 인스타 코디 영상</b></div>
+        <p>영상 속 스타일은 <b>그 사람의 체형과 얼굴</b>에 맞춰진 것입니다. 똑같이 따라 해도 나에게는 어울리지 않는 경우가 많습니다.</p>
+      </div>
+      <div class="whyfail-card">
+        <div class="wf-head"><span class="wf-x">✕</span><b>지인 · 매장 직원의 조언</b></div>
+        <p>그 자리에서는 도움이 되지만, <b>왜 어울리는지</b>까지는 알기 어렵습니다. <b>기준</b>이 남지 않으니 다음 선택은 다시 혼자의 몫이 됩니다.</p>
+      </div>
+      <div class="whyfail-card">
+        <div class="wf-head"><span class="wf-x">✕</span><b>몇 백, 몇 천짜리 스타일링 교육</b></div>
+        <p>몇 개월 동안 비싼 돈 들여서 받아도 똑같아요. <b>본인이 할 만큼 쉽지 않으면, 결국 되돌아 와요.</b></p>
+      </div>
+    </div>
+    <p class="whyfail-close">세 가지 모두 딱 한 가지가 빠져 있습니다.<br><b>나에게 맞춰 정리해주고, <br>혼자서도 유지할 수 있는 기준</b>입니다.<br><b class="wf-punch">리얼미는 바로 그 기준을 만들어 드립니다.</b></p>
+  </section>
+
+  <!-- ===== 4. 서비스 상세 (진단·디렉팅·유지 단계별) =====
+       ※ 기존 '솔루션 / 유지철학 / 진행단계' 3개 섹션을 하나로 합친 상세 버전.
+          각 STEP 이미지는 images/service-1~3.jpg 로 넣으면 됩니다. -->
+  <section class="service" data-reveal>
+    <div class="eyebrow">HOW IT WORKS</div>
+    <h2 class="sec-title">리얼미는 이렇게 <em>진행</em>됩니다</h2>
+    <p class="sec-sub">단계마다 제공하는 서비스를 안내드립니다.</p>
+
+    <!-- STEP 1 · 파인딩 -->
+    <div class="svc-block">
+      <div class="svc-media">
+        <div class="svc-carousel">
+          <div class="svc-ctrack">
+            <div class="svc-slide imgslot r43" data-label="service-1-1.jpg"><img src="images/service-1-1.jpg" alt="파인딩 진단 1" onerror="this.style.display='none'"></div>
+            <div class="svc-slide imgslot r43" data-label="service-1-2.jpg"><img src="images/service-1-2.jpg" alt="파인딩 진단 2" onerror="this.style.display='none'"></div>
+            <div class="svc-slide imgslot r43" data-label="service-1-3.jpg"><img src="images/service-1-3.jpg" alt="파인딩 진단 3" onerror="this.style.display='none'"></div>
+          </div>
+          <button class="svc-nav prev" aria-label="이전">‹</button>
+          <button class="svc-nav next" aria-label="다음">›</button>
+          <div class="svc-dots"></div>
+        </div>
+      </div>
+      <div class="svc-body">
+        <span class="svc-step">STEP 1 · 파인딩 플랜 · 30분</span>
+        <h3 class="svc-title">나를 정확히 아는 것부터</h3>
+          <ul class="svc-list">
+          <li>얼굴형 · 체형 · 분위기 · 피부톤 이미지 진단</li>
+          <li>지금 내가 남에게 어떤 인상으로 보이는지 파악</li>
+          <li>진단 결과표 제공, 끝난 뒤에도 혼자 참고할 수 있어요</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- STEP 2 · 원데이 -->
+    <div class="svc-block reverse">
+      <div class="svc-media">
+        <div class="svc-carousel">
+          <div class="svc-ctrack">
+            <div class="svc-slide imgslot r43" data-label="service-2-1.jpg"><img src="images/service-2-1.jpg" alt="원데이 디렉팅 1" onerror="this.style.display='none'"></div>
+            <div class="svc-slide imgslot r43" data-label="service-2-2.jpg"><img src="images/service-2-2.jpg" alt="원데이 디렉팅 2" onerror="this.style.display='none'"></div>
+            <div class="svc-slide imgslot r43" data-label="service-2-3.jpg"><img src="images/service-2-3.jpg" alt="원데이 디렉팅 3" onerror="this.style.display='none'"></div>
+          </div>
+          <button class="svc-nav prev" aria-label="이전">‹</button>
+          <button class="svc-nav next" aria-label="다음">›</button>
+          <div class="svc-dots"></div>
+        </div>
+      </div>
+      <div class="svc-body">
+        <span class="svc-step">STEP 2 · 원데이 플랜 · 90분</span>
+        <h3 class="svc-title">직접 입어보며 내 것으로</h3>
+                <ul class="svc-list">
+          <li>파인딩 플랜 전 과정 포함</li>
+          <li>나에게 어울리는 색·핏으로 의상 &amp; 스타일 디렉팅</li>
+          <li>헤어 · 핏 · 소매 접는 법까지 '혼자서도 유지하도록' 교육</li>
+          <li>내추럴 SNS 프로필 사진 촬영</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- STEP 3 · 멤버십 -->
+    <div class="svc-block">
+      <div class="svc-media">
+        <div class="svc-carousel">
+          <div class="svc-ctrack">
+            <div class="svc-slide imgslot r43" data-label="service-3-1.jpg"><img src="images/service-3-1.jpg" alt="멤버십 1" onerror="this.style.display='none'"></div>
+            <div class="svc-slide imgslot r43" data-label="service-3-2.jpg"><img src="images/service-3-2.jpg" alt="멤버십 2" onerror="this.style.display='none'"></div>
+            <div class="svc-slide imgslot r43" data-label="service-3-3.jpg"><img src="images/service-3-3.jpg" alt="멤버십 3" onerror="this.style.display='none'"></div>
+          </div>
+          <button class="svc-nav prev" aria-label="이전">‹</button>
+          <button class="svc-nav next" aria-label="다음">›</button>
+          <div class="svc-dots"></div>
+        </div>
+      </div>
+      <div class="svc-body">
+        <span class="svc-step">STEP 3 · 멤버십</span>
+        <h3 class="svc-title">계절이 바뀌어도 유지되도록</h3>
+          <ul class="svc-list">
+	  <li>파인딩, 원데이 플랜 전 과정 포함</li>
+          <li>적립금을 충전해 방문할 때마다 차감하는 방식</li>
+          <li>계절별 · 상황별 · 시즌별 원데이 디렉팅 (무료)</li>
+          <li>디렉팅 중 입어본 옷이 마음에 들면 현장에서 구매 가능</li>
+               </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5. 왜 리얼미인가 (차별점) ===== -->
+  <section class="whyus" data-reveal>
+    <div class="eyebrow">WHY REAL ME</div>
+    <h2 class="sec-title">리얼미가 <em>다른 이유</em></h2>
+    <p class="sec-sub">단발성 진단이나 그룹 강의와는 접근 자체가 다릅니다.</p>
+    <div class="whyus-grid">
+      <div class="whyus-card">
+        <span class="whyus-ico">01</span>
+        <h3>남성 이미지에만 집중</h3>
+        <p>남성의 체형과 상황, 라이프스타일에 맞춘 스타일링. 실제 옷을 만져보며 색감, 질감 등을 조언받습니다. </p>
+      </div>
+      <div class="whyus-card">
+        <span class="whyus-ico">02</span>
+        <h3>디렉터와 1:1로 진행</h3>
+        <p>여러 명을 한 번에 보는 강의가 아니라, 오직 한 사람만을 위한 진단과 디렉팅으로 깊이가 다릅니다.</p>
+      </div>
+      <div class="whyus-card">
+        <span class="whyus-ico">03</span>
+        <h3>진단부터 유지까지 한 곳에서</h3>
+        <p>헤어샵에서 머리 받고, 모르는 사람과 동행 쇼핑? 진단·피팅·헤어·유지까지 한 공간에서 내가 유지할 수 있는 스타일로 완성됩니다.</p>
+      </div>
+      <div class="whyus-card">
+        <span class="whyus-ico">04</span>
+        <h3>송파나루역 도보 2분, 60평 쇼룸 5개</h3>
+        <p>9호선 송파나루역에서 도보 2분 거리에 60평 규모 쇼룸 5개를 갖췄습니다. 발품 팔며 매장을 도는 동행쇼핑과 달리, 한자리에 편히 앉아 충분히 입어보고 완성해요. 직원 눈치도 없습니다.</p>
+      </div>
+    </div>
+
+    <!-- 디렉터 팀 credential -->
+    <div class="team-panel">
+      <span class="team-eyebrow">REAL ME 디렉터 팀</span>
+      <h3 class="team-title">연예인 스타일리스트가 아니라,<br><em>일반인 체형 전문가</em></h3>
+      <p class="team-desc">2022년부터 <b>2,000명 이상</b>, 일반인 체형 보완에만 집중해온 팀입니다. 체형 보완 전문가·글로벌 퍼스널쇼퍼 등 <b>15명 이상</b>의 패션 전문가가 함께하고, 평일 예약 시 수석 디렉터가 직접 진행합니다.</p>
+      <div class="team-stats">
+        <div class="team-stat"><b>2,000<span>명+</span></b><p>누적 디렉팅</p></div>
+        <div class="team-stat"><b>15<span>명+</span></b><p>패션 전문가</p></div>
+      </div>
+    </div>
+
+    <!-- 인사이트 콜아웃 -->
+    <div class="insight-box">
+      <p class="insight-q">💡 연예인에게 어울리는 옷이, 나한텐 왜 안 어울렸을까요?</p>
+      <p class="insight-a">완성된 연예인 체형과 일반인 체형은 전혀 다릅니다. 리얼미는 <b>일반인 체형을 보완하는 노하우</b>로 스타일링해드려요.</p>
+    </div>
+  </section>
+
+  <!-- ===== 5.5 쇼룸 갤러리 (자동 흐름) =====
+       사진은 images/showroom-1.jpg ~ showroom-10.jpg (4:3 권장). JS가 자동 복제해 끊김 없이 흐름. -->
+  <section class="showroom" data-reveal>
+    <div class="eyebrow">OUR SHOWROOM</div>
+    <h2 class="sec-title">송파나루역 60평 <em>프라이빗 쇼룸</em></h2>
+    <p class="sec-sub">발품 파는 동행쇼핑 없이, 이 공간 안에서 모든 게 끝납니다.</p>
+    <div class="shroom-marquee">
+      <div class="shroom-track" id="shroomTrack">
+        <div class="imgslot r43 shroom-img" data-label="showroom-1.jpg"><img src="images/showroom-1.jpg" alt="리얼미 쇼룸 1" onerror="this.style.display='none'"></div>
+        <div class="imgslot r43 shroom-img" data-label="showroom-2.jpg"><img src="images/showroom-2.jpg" alt="리얼미 쇼룸 2" onerror="this.style.display='none'"></div>
+        <div class="imgslot r43 shroom-img" data-label="showroom-3.jpg"><img src="images/showroom-3.jpg" alt="리얼미 쇼룸 3" onerror="this.style.display='none'"></div>
+        <div class="imgslot r43 shroom-img" data-label="showroom-4.jpg"><img src="images/showroom-4.jpg" alt="리얼미 쇼룸 4" onerror="this.style.display='none'"></div>
+        <div class="imgslot r43 shroom-img" data-label="showroom-5.jpg"><img src="images/showroom-5.jpg" alt="리얼미 쇼룸 5" onerror="this.style.display='none'"></div>
+        <div class="imgslot r43 shroom-img" data-label="showroom-6.jpg"><img src="images/showroom-6.jpg" alt="리얼미 쇼룸 6" onerror="this.style.display='none'"></div>
+        <div class="imgslot r43 shroom-img" data-label="showroom-7.jpg"><img src="images/showroom-7.jpg" alt="리얼미 쇼룸 7" onerror="this.style.display='none'"></div>
+        <div class="imgslot r43 shroom-img" data-label="showroom-8.jpg"><img src="images/showroom-8.jpg" alt="리얼미 쇼룸 8" onerror="this.style.display='none'"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 6. 카톡 후기 (증거) ===== -->
+  <section class="reviews-kakao" data-reveal>
+    <div class="eyebrow">REAL STORY</div>
+    <h2 class="sec-title">리얼미에서 디렉받고 나니<br><em>소개팅 하라고 난리에요!</em></h2>
+    <div class="kakao-grid">
+      <div class="imgslot r-free" data-label="kakao-1.jpg"><img src="images/kakao-1.jpg" alt="카톡 후기 1" onerror="this.style.display='none'"></div>
+      <div class="imgslot r-free" data-label="kakao-2.jpg"><img src="images/kakao-2.jpg" alt="카톡 후기 2" onerror="this.style.display='none'"></div>
+      <div class="imgslot r-free" data-label="kakao-3.jpg"><img src="images/kakao-3.jpg" alt="카톡 후기 3" onerror="this.style.display='none'"></div>
+    </div>
+    <p class="kakao-more">* 디렉팅 후 실제로 받은 카톡 메시지들입니다.</p>
+  </section>
+
+  <!-- ===== 7. 인물 사진 마퀴 (증거) ===== -->
+  <section class="lookbook" data-reveal>
+    <div class="eyebrow">WHY REAL ME</div>
+    <h2 class="sec-title">단순한 코디를 넘어<br><em>분위기까지 설계합니다</em></h2>
+    <p class="sec-sub">헤어 · 핏 · 컬러까지, 전문가의 시선으로 당신의 장점을 극대화합니다</p>
+    <div class="marquee">
+      <div class="marquee-track" id="lookTrack"></div>
+    </div>
+  </section>
+
+  <!-- ===== 8. 실제 후기 (증거) ===== -->
+  <section class="reviews-text" data-reveal>
+    <div class="eyebrow">2,000+ REVIEWS</div>
+    <h2 class="sec-title"><em>2000명+</em>의 실제 후기</h2>
+    <p class="sec-sub">수많은 남성들이 리얼미를 선택한 이유</p>
+    <div class="rv-list">
+      <div class="rv-item">
+        <div class="imgslot r-sq" data-label="review-1.jpg"><img src="images/review-1.jpg" alt="후기 사진 1" onerror="this.style.display='none'"></div>
+        <div class="rv-text"><div class="rv-top"><b>연*혁</b><span class="stars">★★★★★</span></div><p>좀 낯설지 않을까 걱정했는데 옷태 나게 어깨 잡아주시고 허리 접는 법도 알려주셔서 좋았어요~ 디렉터님이 친절하고 자세하게 알려주셔서 좋았어요!</p></div>
+      </div>
+      <div class="rv-item">
+        <div class="imgslot r-sq" data-label="review-2.jpg"><img src="images/review-2.jpg" alt="후기 사진 2" onerror="this.style.display='none'"></div>
+        <div class="rv-text"><div class="rv-top"><b>문*진</b><span class="stars">★★★★★</span></div><p>누구에게나 본인에게 맞는 색이 있습니다. 내가 변화될 수 있을까? 라는 고민을 하시고 계신다면, 일단 한번 받아보세요. 무조건 바뀔 수 있습니다.</p></div>
+      </div>
+      <div class="rv-item">
+        <div class="imgslot r-sq" data-label="review-3.jpg"><img src="images/review-3.jpg" alt="후기 사진 3" onerror="this.style.display='none'"></div>
+        <div class="rv-text"><div class="rv-top"><b>박*원</b><span class="stars">★★★★★</span></div><p>잘 모르겠으면 고민하지 말고 컨설팅 받는 게 고민하는 것보다 시간도 아끼고 빨리 다음 연애를 준비할 수 있는 것 같아요.</p></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== 9. 플랜 · 가격 (히어로에서 이동) ===== -->
+  <section class="plans-sec" id="plans" data-reveal>
+    <div class="eyebrow">PLAN &amp; PRICE</div>
+    <h2 class="sec-title">지금 신청하면 <em>첫 방문 50%</em></h2>
+    <p class="sec-sub">선착순 100명 한정. 파인딩 · 원데이 플랜 중 원하는 곳에 사용할 수 있습니다.</p>
     <div class="offer" id="offer">
       <div class="offer-plans">
         <div class="offer-plan">
@@ -111,93 +355,50 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
         <div class="seats-text">남은 자리 <b class="seats-left-text">-</b>명 / 100명</div>
       </div>
       <a href="#" class="offer-cta js-typeform" data-cta="offer">첫 방문 50% 혜택 신청하러 가기 →</a>
-      <p class="offer-note">신청서를 남긴 분에게만 <b>첫 방문 50% 혜택이 적용된 시크릿 페이지</b>가 열립니다.<br>선착순 마감되면 예고 없이 종료됩니다.<br>※ 리얼미 디렉팅은 <b>서울 송파 쇼룸 방문</b>으로 진행됩니다.</p>
+      <p class="offer-note"><b>예약까지 완료한 선착순 100명에게만 할인 혜택이 적용</b>되며, 선착순 마감되면 예고 없이 종료됩니다.<br></p>
     </div>
   </section>
 
-  <!-- ===== 3. 카톡 후기 ===== -->
-  <section class="reviews-kakao" data-reveal>
-    <div class="eyebrow">REAL STORY</div>
-    <h2 class="sec-title">리얼미에서 디렉받고 나니<br><em>소개팅 하라고 난리에요!</em></h2>
-    <div class="kakao-grid">
-      <div class="imgslot r-free" data-label="kakao-1.jpg"><img src="images/kakao-1.jpg" alt="카톡 후기 1" onerror="this.style.display='none'"></div>
-      <div class="imgslot r-free" data-label="kakao-2.jpg"><img src="images/kakao-2.jpg" alt="카톡 후기 2" onerror="this.style.display='none'"></div>
-      <div class="imgslot r-free" data-label="kakao-3.jpg"><img src="images/kakao-3.jpg" alt="카톡 후기 3" onerror="this.style.display='none'"></div>
-    </div>
-    <p class="kakao-more">* 디렉팅 후 실제로 받은 카톡 메시지들입니다.</p>
-  </section>
-
-  <!-- ===== 4. 인물 사진 마퀴 ===== -->
-  <section class="lookbook" data-reveal>
-    <div class="eyebrow">WHY REAL ME</div>
-    <h2 class="sec-title">단순한 코디를 넘어<br><em>분위기까지 설계합니다</em></h2>
-    <p class="sec-sub">헤어 · 핏 · 컬러까지 — 전문가의 시선으로 당신의 장점을 극대화합니다</p>
-    <div class="marquee">
-      <div class="marquee-track" id="lookTrack"></div>
-    </div>
-  </section>
-
-  <!-- ===== 5. 실제 후기 ===== -->
-  <section class="reviews-text" data-reveal>
-    <div class="eyebrow">2,000+ REVIEWS</div>
-    <h2 class="sec-title"><em>2000명+</em>의 실제 후기</h2>
-    <p class="sec-sub">수많은 남성들이 리얼미를 선택한 이유</p>
-    <div class="rv-list">
-      <div class="rv-item">
-        <div class="imgslot r-sq" data-label="review-1.jpg"><img src="images/review-1.jpg" alt="후기 사진 1" onerror="this.style.display='none'"></div>
-        <div class="rv-text"><div class="rv-top"><b>연*혁</b><span class="stars">★★★★★</span></div><p>좀 낯설지 않을까 걱정했는데 옷태 나게 어깨 잡아주시고 허리 접는법도 알려주셔서 좋았어요~ 디렉터님이 친절하고 자세하게 알려주셔서 좋았어요!</p></div>
-      </div>
-      <div class="rv-item">
-        <div class="imgslot r-sq" data-label="review-2.jpg"><img src="images/review-2.jpg" alt="후기 사진 2" onerror="this.style.display='none'"></div>
-        <div class="rv-text"><div class="rv-top"><b>문*진</b><span class="stars">★★★★★</span></div><p>누구에게나 본인에게 맞는 색이 있습니다. 내가 변화될 수 있을까? 라는 고민을 하시고 계신다면, 일단 한번 받아보세요. 무조건 바뀔 수 있습니다.</p></div>
-      </div>
-      <div class="rv-item">
-        <div class="imgslot r-sq" data-label="review-3.jpg"><img src="images/review-3.jpg" alt="후기 사진 3" onerror="this.style.display='none'"></div>
-        <div class="rv-text"><div class="rv-top"><b>박*원</b><span class="stars">★★★★★</span></div><p>잘 모르겠으면 고민하지 말고 컨설팅 받는게 고민하는것보다 시간도 아끼고 빨리 다음 연애를 준비할 수 있는것 같아요.</p></div>
-      </div>
+  <!-- ===== 10. 자주 묻는 질문 (FAQ) ===== -->
+  <section class="faq" data-reveal>
+    <div class="eyebrow">FAQ</div>
+    <h2 class="sec-title">신청 전, 궁금한 점</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>패션에 완전 문외한인데 괜찮을까요?</summary>
+        <p>오히려 그런 분들을 위한 서비스입니다. 기준이 없던 분일수록 변화의 폭이 큽니다. 아무것도 몰라도 디렉터가 처음부터 하나씩 잡아 드립니다.</p>
+      </details>
+      <details class="faq-item">
+        <summary>꼭 송파나루역 쇼룸에 방문해야 하나요?</summary>
+        <p>네. 대면 진단과 직접 입어보는 피팅이 핵심이라 방문이 필요합니다. 100% 사전예약제로 운영되며, 쇼룸 방문이 가능한 분만 신청해주세요.</p>
+      </details>
+      <details class="faq-item">
+        <summary>그 자리에서 옷을 꼭 사야 하나요?</summary>
+        <p>강매는 없습니다. 입어본 옷이 마음에 들면 구매할 수 있고, 구매하지 않아도 진단 결과와 나만의 스타일 기준은 그대로 남습니다.</p>
+      </details>
+      <details class="faq-item">
+        <summary>시간은 얼마나 걸리나요?</summary>
+        <p>파인딩 플랜은 약 30분, 원데이 플랜은 약 90분 진행됩니다. 원하는 플랜을 선택해 방문하시면 됩니다.</p>
+      </details>
+      <details class="faq-item">
+        <summary>첫 방문 50% 혜택은 어떻게 받나요?</summary>
+        <p>신청서를 남기시면 50% 혜택이 적용된 시크릿 페이지가 열립니다. 선착순 100명 한정이며, 소진되면 예고 없이 종료됩니다.</p>
+      </details>
     </div>
   </section>
 
-  <!-- ===== 5.5 당위성 — 유지에 초점 ===== -->
-  <section class="benefits" data-reveal>
-    <div class="eyebrow">MAINTAIN, NOT LEARN</div>
-    <h2 class="sec-title">한 번 바뀌고 끝이 아니라,<br><em>유지되는 변화</em>를 설계합니다</h2>
-    <p class="sec-sub">강의처럼 배우고 끝나면 한 달 뒤 원래대로 돌아갑니다.<br>리얼미는 '나만의 기준'을 만들어 몸에 남깁니다.</p>
-    <div class="benefit-list">
-      <div class="benefit-item"><span class="benefit-check">1</span><div><b>기준을 만듭니다 — 파인딩 플랜 (30분)</b><p>이미지 진단 · 체형 진단 · 진단 결과를 제공합니다. 유행에 맞추기 보다 내 얼굴형, 체형을 분석하여 실제 나에게 맞는 개인화된 진단을 제공합니다.</p></div></div>
-      <div class="benefit-item"><span class="benefit-check">2</span><div><b>기준을 새깁니다 — 원데이 플랜 (90분)</b><p>프라이빗 라운지에서 리얼미 셀렉션 피팅과 스타일 디렉팅, 내추럴 SNS 사진 촬영까지. '내가 직접 꾸미고 유지할 수 있도록' 교육하고, 옷을 입어보며 체화합니다.</p></div></div>
-      <div class="benefit-item"><span class="benefit-check">3</span><div><b>멤버십으로 계속 관리받습니다</b><p>적립금을 충전해 방문할 때마다 차감하는 방식으로, 시즌마다 원데이 디렉팅을 이어갑니다. 디렉팅에서 입어본 옷이 마음에 들면 그 자리에서 구매할 수도 있어요.</p></div></div>
-    </div>
-  </section>
-
-  <!-- ===== 6. 진행 단계 (discount50 플로우 4단계) ===== -->
-  <section class="process" data-reveal>
-    <div class="eyebrow">PROCESS</div>
-    <h2 class="sec-title">리얼미 <em>진행 단계</em></h2>
-    <p class="sec-sub">신청부터 멤버십까지, 실패 없는 4단계</p>
-    <div class="proc-grid">
-      <div class="proc-item"><div class="imgslot r43" data-label="step-1.jpg"><img src="images/step-1.jpg" alt="상담 신청 및 사전질문 작성" onerror="this.style.display='none'"></div><div class="proc-no">STEP 1</div><h3>상담 신청 &amp; 사전질문 작성</h3><p>평소 스타일 고민과 선호도를 파악하기 위한 심층 설문을 작성합니다.</p></div>
-      <div class="proc-item"><div class="imgslot r43" data-label="step-2.jpg"><img src="images/step-2.jpg" alt="1:1 대면 상담" onerror="this.style.display='none'"></div><div class="proc-no">STEP 2</div><h3>1:1 대면 상담</h3><p>서울 송파 쇼룸에 방문하여 1:1 맞춤 분석을 진행합니다. 개인이 가지고 있는 분위기, 체형, 얼굴형, 피부 톤 등을 전문 디렉터가 진단합니다.</p></div>
-      <div class="proc-item"><div class="imgslot r43" data-label="step-3.jpg"><img src="images/step-3.jpg" alt="프라이빗 피팅 현장 디렉팅" onerror="this.style.display='none'"></div><div class="proc-no">STEP 3</div><h3>프라이빗 피팅 (현장 디렉팅)</h3><p>프라이빗 쇼룸에서 진단받는 내용을 토대로 개인화 교육 및 스타일 변신을 진행합니다.</p></div>
-      <div class="proc-item"><div class="imgslot r43" data-label="step-4.jpg"><img src="images/step-4.jpg" alt="멤버십 유지" onerror="this.style.display='none'"></div><div class="proc-no">STEP 4</div><h3>멤버십 유지</h3><p>멤버십을 신청하시면 적립금을 충전하여 언제든 원하실 때 방문하여 계절별, 상황별, 시즌별 디렉팅을 진행합니다. (적립금 차감 방식)</p></div>
-    </div>
-  </section>
-
-  <!-- ===== 7. 운영 안내 + 신청 CTA ===== -->
+  <!-- ===== 11. 운영 안내 + 최종 CTA ===== -->
   <section id="apply" class="apply" data-reveal>
     <div class="eyebrow">SECRET PROMOTION</div>
-    <h2 class="sec-title">선착순 100명 <em>첫 방문 50% 특별 혜택</em></h2>
+    <h2 class="sec-title">선착순 100명<br> <em>첫 방문 50% 특별 혜택</em></h2>
 
     <div class="info-table">
       <div class="info-row"><span>운영 시간</span><b>10:00 ~ 19:00</b></div>
-      <div class="info-row"><span>진행 장소</span><b>서울 송파 리얼미 쇼룸</b></div>
+      <div class="info-row"><span>진행 장소</span><b>9호선 송파나루역 도보 2분</b></div>
       <div class="info-row"><span>예약 안내</span><b>100% 사전예약제</b></div>
     </div>
     <div class="info-notice">
-      <p>리얼미 디렉팅은 <b>서울 송파 쇼룸 방문</b>으로 진행됩니다.<br>쇼룸 방문이 가능한 분만 신청해주세요!</p>
-    </div>
-    <div class="info-notice">
-      <p>남은 자리 <b class="seats-left-text">-</b>명 — 소진되면 예고 없이 종료됩니다.</p>
+      <p>리얼미 디렉팅은 <b>9호선 송파나루역 쇼룸 방문</b>으로 진행됩니다.<br>쇼룸 방문이 가능한 분만 신청해주세요!</p>
     </div>
 
     <a href="#" class="apply-cta js-typeform" data-cta="apply">지금 첫 방문 50% 혜택 신청하기</a>
@@ -217,6 +418,6 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
   </div>
 </div>
 
-<script src="main.js?v=20260715a"></script>
+<script src="main.js?v=20260722a"></script>
 </body>
 </html>

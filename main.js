@@ -105,8 +105,8 @@
   var FORWARD_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid", "gclid"];
   function buildTypeformUrl() {
     var src = new URLSearchParams(location.search), parts = [];
-    // 히어로 A/B 구분: /style(.html)=얼굴, 그 외(index)=좋은분 → utm_source로 타입폼에 전달 → 시트 '랜딩' 열에 기록
-    var hero = /\/style(?:\.html)?(?:$|[?#])/i.test(location.pathname) ? "얼굴" : "좋은분";
+    // 스타일 A/B 구분(2026-07-22): /style(.html)=기존형(검정·빨강), 그 외(index)=신규형(부드러운 상세) → utm_source로 타입폼 전달 → 시트 '랜딩' 열 기록
+    var hero = /\/style(?:\.html)?(?:$|[?#])/i.test(location.pathname) ? "기존형" : "신규형";
     FORWARD_KEYS.forEach(function (k) {
       var v = (k === "utm_source") ? hero : src.get(k);
       if (v) parts.push(encodeURIComponent(k) + "=" + encodeURIComponent(v));
@@ -191,5 +191,67 @@
     track.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; stop(); }, { passive: true });
     track.addEventListener("touchend", function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) { dx < 0 ? next() : go(cur - 1); } x0 = null; start(); }, { passive: true });
     start();
+  })();
+
+  /* ===== 스크롤 뎁스별 sticky CTA 등장 (2026-07-21 개편) =====
+     히어로에서 스크롤 두어 번 하면(히어로 문구가 화면 위로 지나가면) 하단 CTA가 나타난다.
+     (원본 index/style은 style.css에 초기 숨김 규칙이 없어 항상 표시, 영향 없음) */
+  (function () {
+    var sticky = document.getElementById("stickyCta");
+    if (!sticky) return;
+    var target = document.querySelector(".hero-sub") || document.querySelector(".hero");
+    if (!target || !("IntersectionObserver" in window)) { sticky.classList.add("is-shown"); return; }
+    var so = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { sticky.classList.toggle("is-shown", !en.isIntersecting); });
+    }, { threshold: 0, rootMargin: "-200px 0px -10% 0px" });
+    so.observe(target);
+  })();
+
+  /* ===== 서비스 단계 이미지 캐러셀 (STEP 1·2·3) 클릭/점/스와이프 (자동 슬라이드 없음) ===== */
+  (function () {
+    var cars = document.querySelectorAll(".svc-carousel");
+    if (!cars.length) return;
+    Array.prototype.forEach.call(cars, function (car) {
+      var track = car.querySelector(".svc-ctrack");
+      if (!track) return;
+      var n = track.children.length;
+      var dotsWrap = car.querySelector(".svc-dots");
+      var cur = 0, timer = null;
+      // 슬라이드 1장이면 컨트롤 숨기고 종료
+      if (n <= 1) {
+        var pv0 = car.querySelector(".svc-nav.prev"), nx0 = car.querySelector(".svc-nav.next");
+        if (pv0) pv0.style.display = "none";
+        if (nx0) nx0.style.display = "none";
+        return;
+      }
+      for (var i = 0; i < n; i++) {
+        var d = document.createElement("span");
+        d.className = "d" + (i === 0 ? " active" : "");
+        d.setAttribute("data-i", i);
+        dotsWrap.appendChild(d);
+      }
+      var dots = dotsWrap.children;
+      function go(k) {
+        cur = (k + n) % n;
+        track.style.transform = "translateX(-" + (cur * 100) + "%)";
+        for (var i = 0; i < dots.length; i++) dots[i].classList.toggle("active", i === cur);
+      }
+      function next() { go(cur + 1); }
+      // 자동 슬라이드 없음: 클릭·점·스와이프로만 이동 (2026-07-21 사용자 요청)
+      var prev = car.querySelector(".svc-nav.prev"), nx = car.querySelector(".svc-nav.next");
+      if (prev) prev.onclick = function () { go(cur - 1); };
+      if (nx) nx.onclick = function () { next(); };
+      for (var j = 0; j < dots.length; j++) dots[j].onclick = function () { go(+this.getAttribute("data-i")); };
+      var x0 = null;
+      track.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener("touchend", function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) { dx < 0 ? next() : go(cur - 1); } x0 = null; }, { passive: true });
+    });
+  })();
+
+  /* ===== 쇼룸 갤러리 마퀴: 트랙을 복제해 끊김 없이 흐르게 ===== */
+  (function () {
+    var track = document.getElementById("shroomTrack");
+    if (!track) return;
+    track.innerHTML += track.innerHTML; // 2배 복제 → CSS translateX(-50%) 루프가 seamless
   })();
 })();
