@@ -2,17 +2,8 @@
   "use strict";
 
   /* ★★★ 운영 설정 — 여기만 수정하면 됨 ★★★ */
-  // discount50 전용 타입폼 (2026-07-11 생성, impact-me용 nY7F5abi 와 별도)
-  var TYPEFORM = "https://artin1ife.typeform.com/to/NN0cEjOV";
-
-  // 남은 쿠폰 연출: 시작값에서 보는 동안 실시간으로 1~2장씩 감소 (재방문 시 이어짐, 바닥값에서 정지)
-  var SEATS_TOTAL = 100;
-  var SEATS_START = 63;             // ★ 시작 장수 — 캠페인 리셋 시 여기만 조정
-  var SEATS_FLOOR = 21;             // ★ 이 밑으로는 안 내려감
-
-  // 실시간 시청자 연출 (플로팅 배지)
-  var VIEWERS_MIN = 3600;
-  var VIEWERS_MAX = 4800;
+  // 첫 방문 50% 혜택 신청 폼
+  var BOOKING_URL = "https://artin1ife.typeform.com/to/NN0cEjOV?utm_source=story";
 
   /* 통합 이벤트: GA4(gtag) + 메타픽셀(fbq) */
   function trackEvent(name, params) {
@@ -38,98 +29,28 @@
     reveal.forEach(function (el) { io.observe(el); });
   } else { reveal.forEach(function (el) { el.classList.add("is-visible"); }); }
 
-  /* ===== 남은 쿠폰 실시간 감소 연출 =====
-     - 시작값(SEATS_START)에서 12~35초 간격으로 1~2장씩 감소
-     - localStorage로 재방문 시 이어짐 (숫자가 다시 늘어나 보이는 일 없음)
-     - SEATS_FLOOR에서 정지 */
+  /* 모든 CTA → 신청 폼 이동 + 퍼널용 cta_click
+     광고 utm(캠페인·소재명)을 타입폼까지 전달 — 소재별 완료·결제 추적용 (2026-08-04, 상세형과 동일 방식).
+     utm_source는 랜딩 식별자 'story'로 고정. */
   (function () {
-    var els = document.querySelectorAll(".seats-left-text");
-    if (!els.length) return;
-    var KEY = "d50_seats";
-    var val = parseInt(localStorage.getItem(KEY) || "0", 10);
-    if (!val || val > SEATS_START || val < SEATS_FLOOR) val = SEATS_START;
-
-    function render(flash) {
-      els.forEach(function (el) {
-        el.textContent = val;
-        if (flash) {
-          el.classList.remove("seat-drop");
-          void el.offsetWidth; // 애니메이션 재시작
-          el.classList.add("seat-drop");
-        }
-      });
-      document.querySelectorAll(".seats-fill").forEach(function (f) {
-        // 게이지 = "남은" 비율 — 쿠폰이 줄면 바도 같이 줄어듦
-        f.style.width = Math.round(val / SEATS_TOTAL * 100) + "%";
-        if (flash) {
-          f.classList.remove("bar-flash");
-          void f.offsetWidth;
-          f.classList.add("bar-flash");
-        }
-      });
+    var FORWARD_KEYS = ["utm_campaign", "utm_content", "utm_term", "fbclid", "gclid"];
+    function buildBookingUrl() {
+      var parts = ["utm_source=story"];
+      try {
+        var src = new URLSearchParams(location.search);
+        FORWARD_KEYS.forEach(function (k) {
+          var v = src.get(k);
+          if (v) parts.push(k + "=" + encodeURIComponent(v));
+        });
+      } catch (e) {}
+      return "https://artin1ife.typeform.com/to/NN0cEjOV?" + parts.join("&");
     }
-    function save() { try { localStorage.setItem(KEY, String(val)); } catch (e) {} }
-    function schedule() { setTimeout(tick, 9000 + Math.random() * 14000); } // 9~23초 간격
-    function tick() {
-      if (val > SEATS_FLOOR) {
-        val -= (Math.random() < 0.25 ? 2 : 1);
-        if (val < SEATS_FLOOR) val = SEATS_FLOOR;
-        save();
-        render(true);
-      }
-      schedule();
-    }
-    render(false);
-    save();
-    // 첫 감소는 진입 5초 이내 — 들어오자마자 "방금 누가 받아갔다"는 인상
-    setTimeout(tick, 2500 + Math.random() * 2000);
-  })();
-
-  /* ===== 실시간 시청자 플로팅 배지 (숫자 랜덤워크) ===== */
-  (function () {
-    var el = document.getElementById("viewerCount");
-    if (!el) return;
-    var v = 3950 + Math.floor(Math.random() * 320);
-    function render() { el.textContent = v.toLocaleString("ko-KR"); }
-    function tick() {
-      var delta = Math.floor(Math.random() * 29) - 13; // -13 ~ +15 (살짝 증가 편향)
-      v = Math.max(VIEWERS_MIN, Math.min(VIEWERS_MAX, v + delta));
-      render();
-      setTimeout(tick, 3500 + Math.random() * 5000);
-    }
-    render();
-    setTimeout(tick, 2500);
-  })();
-
-  /* 타입폼 URL 빌더 — 랜딩 UTM/클릭ID 전달 (impact-me와 동일한 검증된 방식) */
-  var FORWARD_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid", "gclid"];
-  function buildTypeformUrl() {
-    var src = new URLSearchParams(location.search), parts = [];
-    // 스타일 A/B 구분(2026-07-22): /style(.html)=기존형(검정·빨강), 그 외(index)=신규형(부드러운 상세) → utm_source로 타입폼 전달 → 시트 '랜딩' 열 기록
-    var hero = /\/style(?:\.html)?(?:$|[?#])/i.test(location.pathname) ? "기존형" : "신규형";
-    FORWARD_KEYS.forEach(function (k) {
-      var v = (k === "utm_source") ? hero : src.get(k);
-      if (v) parts.push(encodeURIComponent(k) + "=" + encodeURIComponent(v));
-    });
-    return TYPEFORM + (parts.length ? "?" + parts.join("&") : "");
-  }
-
-  /* 모든 CTA → 타입폼 이동 + 퍼널용 cta_click 발사 */
-  (function () {
-    var placeholder = TYPEFORM.indexOf("XXXXXXXX") !== -1;
-    var url = buildTypeformUrl();
+    var url = buildBookingUrl();
     document.querySelectorAll(".js-typeform").forEach(function (a) {
-      if (!placeholder) a.setAttribute("href", url);
-      a.addEventListener("click", function (e) {
-        // 전환(Lead)은 타입폼 완료 시 발사. 랜딩에선 퍼널용 cta_click만.
+      a.setAttribute("href", url);
+      a.addEventListener("click", function () {
         trackEvent("cta_click", { location: a.getAttribute("data-cta") || "cta", label: (a.textContent || "").trim() });
-        if (placeholder) {
-          e.preventDefault();
-          console.warn("[discount50] TYPEFORM URL이 아직 플레이스홀더입니다. main.js 상단에서 교체하세요.");
-          var orig = a.textContent;
-          a.textContent = "신청 페이지 준비 중입니다";
-          setTimeout(function () { a.textContent = orig; }, 1800);
-        }
+        try { if (typeof window.fbq === "function") window.fbq("track", "Lead"); } catch (e) {}
       });
     });
   })();
@@ -139,22 +60,22 @@
     var track = document.getElementById("lookTrack");
     if (!track) return;
     var REVIEWS = [
-      ["김*준", "어깨라인부터 달라지니까 옷이 사는 느낌이에요."],
-      ["이*호", "처음으로 거울 보는 게 즐거워졌습니다."],
-      ["박*우", "컬러 하나 바꿨을 뿐인데 인상이 확 변했어요."],
-      ["정*민", "회사에서 무슨 일 있냐는 소리 들었습니다 ㅎㅎ"],
-      ["최*석", "막연했던 스타일 고민이 한 번에 정리됐어요."],
-      ["강*현", "핏 잡는 법 배우고 나서 옷값이 아깝지 않아요."],
-      ["윤*탁", "소개팅 자리에서 자신감이 생기더라고요."],
-      ["임*규", "헤어까지 같이 봐주셔서 완성도가 다릅니다."],
-      ["한*결", "내 장점이 뭔지 처음 알게 됐어요."],
-      ["오*진", "사진 찍을 때 더 이상 피하지 않게 됐습니다."],
-      ["서*빈", "비포 애프터 보고 제가 더 놀랐어요."],
-      ["남*철", "딱 필요한 것만 짚어주셔서 효율적이었어요."],
-      ["조*영", "친구들이 스타일리스트 붙였냐고 묻습니다."],
-      ["배*훈", "어색할까 걱정했는데 정말 편하게 진행됐어요."],
-      ["문*기", "퍼스널컬러 진단 받고 쇼핑이 쉬워졌어요."],
-      ["신*우", "한 번의 디렉팅으로 방향이 완전히 잡혔습니다."]
+      ["김*준", "소개팅 나가면 애프터가 오기 시작했어요."],
+      ["이*호", "첫인상이 달라지니 대화 분위기부터 편해졌어요."],
+      ["박*우", "컬러 하나 바꿨을 뿐인데 '느낌 있다'는 말을 들어요."],
+      ["정*민", "만난 지 3주 만에 여자친구가 생겼습니다 ㅎㅎ"],
+      ["최*석", "소개팅 자리에서 자신감이 완전히 달라졌어요."],
+      ["강*현", "프로필 사진부터 바꾸니 매칭률이 확 올랐어요."],
+      ["윤*탁", "상대가 먼저 다음 약속을 잡자고 하더라고요."],
+      ["임*규", "헤어까지 봐주셔서 데이트룩 고민이 사라졌어요."],
+      ["한*결", "결혼 상대를 진지하게 만나기 시작했습니다."],
+      ["오*진", "데이트 사진 찍는 게 더는 부담스럽지 않아요."],
+      ["서*빈", "소개팅 성공률이 이렇게 달라질 줄 몰랐어요."],
+      ["남*철", "상견례 자리 코디까지 챙겨주셔서 든든했어요."],
+      ["조*영", "여자친구가 스타일 좋아졌다고 먼저 칭찬해요."],
+      ["배*훈", "어색할까 걱정했는데 연애 상담까지 받은 기분이에요."],
+      ["문*기", "퍼스널컬러 알고 나서 데이트룩이 쉬워졌어요."],
+      ["신*우", "한 번의 디렉팅으로 연애 준비가 끝났습니다."]
     ];
     function set() {
       var s = "";
@@ -193,18 +114,25 @@
     start();
   })();
 
-  /* ===== 스크롤 뎁스별 sticky CTA 등장 (2026-07-21 개편) =====
-     히어로에서 스크롤 두어 번 하면(히어로 문구가 화면 위로 지나가면) 하단 CTA가 나타난다.
-     (원본 index/style은 style.css에 초기 숨김 규칙이 없어 항상 표시, 영향 없음) */
+  /* ===== 페이지의 절반을 읽은 뒤 sticky CTA 등장 ===== */
   (function () {
     var sticky = document.getElementById("stickyCta");
     if (!sticky) return;
-    var target = document.querySelector(".hero-sub") || document.querySelector(".hero");
-    if (!target || !("IntersectionObserver" in window)) { sticky.classList.add("is-shown"); return; }
-    var so = new IntersectionObserver(function (es) {
-      es.forEach(function (en) { sticky.classList.toggle("is-shown", !en.isIntersecting); });
-    }, { threshold: 0, rootMargin: "-200px 0px -10% 0px" });
-    so.observe(target);
+    var ticking = false;
+    function updateSticky() {
+      var doc = document.documentElement;
+      var depth = (doc.scrollTop + window.innerHeight) / doc.scrollHeight;
+      sticky.classList.toggle("is-shown", depth >= 0.5);
+      ticking = false;
+    }
+    function requestUpdate() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(updateSticky);
+    }
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    updateSticky();
   })();
 
   /* ===== 서비스 단계 이미지 캐러셀 (STEP 1·2·3) 클릭/점/스와이프 (자동 슬라이드 없음) ===== */
