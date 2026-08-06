@@ -29,11 +29,25 @@
     reveal.forEach(function (el) { io.observe(el); });
   } else { reveal.forEach(function (el) { el.classList.add("is-visible"); }); }
 
-  /* 모든 CTA → 신청 폼 이동 + 퍼널용 cta_click */
+  /* 모든 CTA → 신청 폼 이동 + 퍼널용 cta_click
+     광고 utm(캠페인·소재명)을 타입폼까지 전달 — 소재별 완료·결제 추적용 (2026-08-04, 상세형과 동일 방식).
+     utm_source는 랜딩 식별자 'story'로 고정. */
   (function () {
+    var FORWARD_KEYS = ["utm_campaign", "utm_content", "utm_term", "fbclid", "gclid"];
+    function buildBookingUrl() {
+      var parts = ["utm_source=story"];
+      try {
+        var src = new URLSearchParams(location.search);
+        FORWARD_KEYS.forEach(function (k) {
+          var v = src.get(k);
+          if (v) parts.push(k + "=" + encodeURIComponent(v));
+        });
+      } catch (e) {}
+      return "https://artin1ife.typeform.com/to/NN0cEjOV?" + parts.join("&");
+    }
+    var url = buildBookingUrl();
     document.querySelectorAll(".js-typeform").forEach(function (a) {
-      var href = a.getAttribute("href");
-      if (!href || href === "#") a.setAttribute("href", BOOKING_URL);
+      a.setAttribute("href", url);
       a.addEventListener("click", function () {
         trackEvent("cta_click", { location: a.getAttribute("data-cta") || "cta", label: (a.textContent || "").trim() });
         try { if (typeof window.fbq === "function") window.fbq("track", "Lead"); } catch (e) {}
