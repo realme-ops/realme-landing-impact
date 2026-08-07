@@ -108,6 +108,9 @@
     var src = new URLSearchParams(location.search), parts = [];
     // 스타일 A/B 구분(2026-07-22): /style(.html)=기존형(검정·빨강), 그 외(index)=신규형(부드러운 상세) → utm_source로 타입폼 전달 → 시트 '랜딩' 열 기록
     var hero = /\/style(?:\.html)?(?:$|[?#])/i.test(location.pathname) ? "기존형" : "신규형";
+    // 리타겟 유입(2026-08-08): utm_campaign이 Retarget_* 이면 utm_source='리타겟'으로 표기 — 시트에서 바로 구분용.
+    // 리타겟은 항상 index(신규형) 경로로만 들어와 페이지 정보 손실 없음. A/B 집계 제외는 utm_campaign 필터가 담당(fetch_ab_variant).
+    if (/^retarget/i.test(src.get("utm_campaign") || "")) hero = "리타겟";
     FORWARD_KEYS.forEach(function (k) {
       var v = (k === "utm_source") ? hero : src.get(k);
       if (v) parts.push(encodeURIComponent(k) + "=" + encodeURIComponent(v));
