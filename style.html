@@ -75,11 +75,11 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
     <div class="nav-row">STYLING<img class="brand-logo" src="images/logo-white.png" alt="REAL ME">PERSONAL</div>
 
     <div class="hero-eyebrow">남성 이미지 컨설팅 · REAL ME</div>
-    <h1 class="hero-title">얼굴은 그대로인데<br><em>애프터가 쏟아지기 시작한 남자들</em><br>대체 뭘 바꿨을까요?</h1>
-    <p class="hero-sub"><span style="display:block;font-size:15px;line-height:1.35;margin-bottom:14px;">대화도, 성형도 아니에요.</span>리얼미는 한 번의 사진, 한 번의 변신이 아니라<br><b>스스로 유지하는 모습</b>을 만듭니다.</p>
+    <h1 data-mark="hero_title" class="hero-title">얼굴은 그대로인데<br><em>애프터가 쏟아지기 시작한 남자들</em><br>대체 뭘 바꿨을까요?</h1>
+    <p data-mark="hero_sub" class="hero-sub"><span style="display:block;font-size:15px;line-height:1.35;margin-bottom:14px;">대화도, 성형도 아니에요.</span>리얼미는 한 번의 사진, 한 번의 변신이 아니라<br><b>스스로 유지하는 모습</b>을 만듭니다.</p>
 
     <!-- ===== 상단 오퍼 (킥커 + 카운트다운 + CTA) ===== -->
-    <div class="offer offer-top">
+    <div data-mark="hero_offer" class="offer offer-top">
       <div class="offer-kicker">선착순 100명 한정 · 첫 방문 50% 특별 혜택</div>
       <p class="offer-what">얼굴형·체형 진단부터 1:1 스타일 디렉팅까지<br><b>파인딩·원데이 전 플랜 50%</b></p>
       <div class="seats">
@@ -89,7 +89,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
       <a href="#" class="offer-cta js-typeform" data-cta="offer-top">첫 방문 50% 혜택 신청하러 가기 →</a>
     </div>
 
-    <div class="slider">
+    <div data-mark="hero_slider" class="slider">
       <div class="slider-view">
         <div class="slider-track" id="baTrack">
           <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-1.jpg"><img src="images/ba-before-1.jpg" alt="비포 1" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-1.jpg"><img src="images/ba-after-1.jpg" alt="애프터 1" onerror="this.style.display='none'"></div></div></div>
@@ -110,7 +110,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
     <p class="slider-caption">* 리얼미 솔루션을 직접 경험한 실제 비포/애프터 사례입니다.</p>
 
     <!-- ===== 플랜 + 남은 쿠폰 오퍼 카드 ===== -->
-    <div class="offer" id="offer">
+    <div data-mark="hero_plans" class="offer" id="offer">
       <div class="offer-plans">
         <div class="offer-plan">
           <div class="op-name">파인딩(Finding) 플랜 <span>30분</span></div>
@@ -243,22 +243,8 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
   </div>
 </div>
 
-<script src="main.js?v=20260722a"></script>
-<script>
-/* 섹션 도달 트래킹 (2026-08-07): data-sec 지점이 화면 하단 35% 위로 들어오면 GA4 이벤트 1회. */
-(function () {
-  var secs = document.querySelectorAll("[data-sec]");
-  if (!secs.length || !("IntersectionObserver" in window)) return;
-  var io = new IntersectionObserver(function (es) {
-    es.forEach(function (en) {
-      if (!en.isIntersecting) return;
-      var name = en.target.getAttribute("data-sec");
-      io.unobserve(en.target);
-      try { if (typeof window.gtag === "function") window.gtag("event", name, { landing: "discount-face" }); } catch (e) {}
-    });
-  }, { threshold: 0, rootMargin: "0px 0px -35% 0px" });
-  secs.forEach(function (el) { io.observe(el); });
-})();
-</script>
+<script src="main.js?v=20260831a"></script>
+<!-- 섹션·세부지점 도달 트래킹은 2026-08-31 부터 main.js 로 통합됨.
+     여기에 다시 인라인으로 넣으면 이벤트가 2번 발사되므로 넣지 말 것. -->
 </body>
 </html>

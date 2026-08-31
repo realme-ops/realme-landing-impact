@@ -1,6 +1,10 @@
 (function () {
   "use strict";
 
+  /* ⚠️ 이 파일을 수정하면 각 랜딩 HTML 의 <script src="main.js?v=날짜"> 버전을 반드시 올릴 것.
+     안 올리면 브라우저가 캐시된 옛 main.js 를 계속 써서 수정이 반영되지 않는다.
+     2026-08-31 실제로 이걸로 트래킹이 안 붙어 한참 헤맸다. 현재 v=20260831a. */
+
   /* ★★★ 운영 설정 — 여기만 수정하면 됨 ★★★ */
   // discount50 전용 타입폼 (2026-07-11 생성, impact-me용 nY7F5abi 와 별도)
   var TYPEFORM = "https://artin1ife.typeform.com/to/NN0cEjOV";
@@ -260,5 +264,46 @@
     var track = document.getElementById("shroomTrack");
     if (!track) return;
     track.innerHTML += track.innerHTML; // 2배 복제 → CSS translateX(-50%) 루프가 seamless
+  })();
+
+  /* ===== 도달 트래킹 (2026-08-31: 랜딩별 인라인 스크립트를 main.js 로 통합) =====
+     왜 옮겼나: 기존엔 랜딩 HTML 마다 같은 스크립트를 복붙하고 landing 값만 손으로 바꿔 넣었다.
+     새 랜딩을 만들 때 빠뜨리기 쉽고, 실제로 랜딩마다 값이 제각각이었다. 여기로 모으면
+     main.js 만 불러도 자동으로 걸린다. **랜딩 HTML 의 인라인 트래킹 블록은 제거할 것**
+     (남겨두면 같은 이벤트가 2번 발사된다).
+
+     두 층위를 관측한다:
+       [data-sec]  섹션 단위  — 어느 섹션까지 내려갔나 (기존)
+       [data-mark] 섹션 내부  — 큰 블록(특히 히어로) 안에서 어디서 멈췄나 (신규)
+     2026-08-31 실측: 히어로에서 48~55% 가 이탈하는데 히어로가 이벤트 하나라 지점을 몰랐다.
+
+     발사 조건은 기존과 동일 — 요소가 화면 하단 35% 위로 들어오면 1회. */
+  (function () {
+    var nodes = document.querySelectorAll("[data-sec],[data-mark]");
+    if (!nodes.length || !("IntersectionObserver" in window)) return;
+
+    // landing 값은 경로에서 파생 → 새 랜딩을 추가해도 코드 수정 없이 잡힌다.
+    var path = location.pathname;
+    var landing =
+      /\/style(?:\.html)?(?:$|[?#])/i.test(path) ? "discount-face" :
+      /\/full(?:\.html)?(?:$|[?#])/i.test(path) ? "discount-full" :
+      "discount-me";
+
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var el = en.target;
+        io.unobserve(el);
+        var name = el.getAttribute("data-sec") || el.getAttribute("data-mark");
+        if (!name) return;
+        try {
+          if (typeof window.gtag === "function") {
+            window.gtag("event", name, { landing: landing });
+          }
+        } catch (e) {}
+      });
+    }, { threshold: 0, rootMargin: "0px 0px -35% 0px" });
+
+    nodes.forEach(function (el) { io.observe(el); });
   })();
 })();

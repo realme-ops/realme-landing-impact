@@ -110,14 +110,14 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
     <div class="nav-row">STYLING<img class="brand-logo" src="images/logo-white.png" alt="REAL ME">PERSONAL</div>
 
     <div class="hero-eyebrow">남성 이미지 컨설팅 · REAL ME</div>
-    <h1 class="hero-title">얼굴은 그대로인데<br><em>애프터가 쏟아지기 시작한 남자들</em><br>대체 뭘 바꿨을까요?</h1>
-    <p class="hero-sub"><span style="display:block;font-size:15px;line-height:1.35;margin-bottom:14px;">대화도, 성형도 아니에요.</span>리얼미는 한 번의 사진, 한 번의 변신이 아니라<br><b>스스로 유지하는 모습</b>을 만듭니다.</p>
+    <h1 data-mark="hero_title" class="hero-title">얼굴은 그대로인데<br><em>애프터가 쏟아지기 시작한 남자들</em><br>대체 뭘 바꿨을까요?</h1>
+    <p data-mark="hero_sub" class="hero-sub"><span style="display:block;font-size:15px;line-height:1.35;margin-bottom:14px;">대화도, 성형도 아니에요.</span>리얼미는 한 번의 사진, 한 번의 변신이 아니라<br><b>스스로 유지하는 모습</b>을 만듭니다.</p>
 
     <!-- 상단 오퍼/CTA 제거 (2026-07-21 개편): 첫 화면은 훅+비포애프터로 스크롤 유도.
          오퍼·CTA는 아래 섹션 + 스크롤 뎁스별 sticky 버튼이 담당. -->
-    <div class="hero-hint" aria-hidden="true">↓ 어떻게 바뀌는지 직접 보세요</div>
+    <div data-mark="hero_hint" class="hero-hint" aria-hidden="true">↓ 어떻게 바뀌는지 직접 보세요</div>
 
-    <div class="slider">
+    <div data-mark="hero_slider" class="slider">
       <div class="slider-view">
         <div class="slider-track" id="baTrack">
           <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-1.jpg"><img src="images/ba-before-1.jpg" alt="비포 1" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-1.jpg"><img src="images/ba-after-1.jpg" alt="애프터 1" onerror="this.style.display='none'"></div></div></div>
@@ -482,7 +482,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
   </div>
 </div>
 
-<script src="main.js?v=20260808b"></script>
+<script src="main.js?v=20260831a"></script>
 <!-- 스크롤 뎁스 25/50/75 이벤트 (GA4 기본 scroll=90%만 있어 구간 보완, 2026-07-30)
      이벤트명 자체를 scroll_25/50/75로 분리 — GA4에서 파라미터 등록 없이 바로 조회 가능 -->
 <script>
@@ -502,21 +502,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
   window.addEventListener('scroll', check, { passive: true });
 })();
 </script>
-<script>
-/* 섹션 도달 트래킹 (2026-08-07): data-sec 지점이 화면 하단 35% 위로 들어오면 GA4 이벤트 1회. */
-(function () {
-  var secs = document.querySelectorAll("[data-sec]");
-  if (!secs.length || !("IntersectionObserver" in window)) return;
-  var io = new IntersectionObserver(function (es) {
-    es.forEach(function (en) {
-      if (!en.isIntersecting) return;
-      var name = en.target.getAttribute("data-sec");
-      io.unobserve(en.target);
-      try { if (typeof window.gtag === "function") window.gtag("event", name, { landing: "discount-me" }); } catch (e) {}
-    });
-  }, { threshold: 0, rootMargin: "0px 0px -35% 0px" });
-  secs.forEach(function (el) { io.observe(el); });
-})();
-</script>
+<!-- 섹션·세부지점 도달 트래킹은 2026-08-31 부터 main.js 로 통합됨.
+     여기에 다시 인라인으로 넣으면 이벤트가 2번 발사되므로 넣지 말 것. -->
 </body>
 </html>
