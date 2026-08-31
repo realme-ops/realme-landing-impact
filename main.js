@@ -112,6 +112,11 @@
     var src = new URLSearchParams(location.search), parts = [];
     // 스타일 A/B 구분(2026-07-22): /style(.html)=기존형(검정·빨강), 그 외(index)=신규형(부드러운 상세) → utm_source로 타입폼 전달 → 시트 '랜딩' 열 기록
     var hero = /\/style(?:\.html)?(?:$|[?#])/i.test(location.pathname) ? "기존형" : "신규형";
+    // 합본 랜딩(2026-08-31): /full = 얼굴형 뼈대 + 상세형 설득섹션 4블록. 위 삼항식은
+    // "/style 이 아니면 전부 신규형"이라 /full 이 상세형 데이터에 섞여버린다. 별도 값으로 찍어야
+    // 타입폼 시트에서 분리 집계된다. ⚠ fetch_ab_variant.py 의 variant_of() 는 아직 '통합형'을
+    // 모르므로(세트 미상 처리) /full 에 광고를 태우기 전에 대시보드 매핑을 추가할 것.
+    if (/\/full(?:\.html)?(?:$|[?#])/i.test(location.pathname)) hero = "통합형";
     // 리타겟 유입(2026-08-08): utm_campaign이 Retarget_* 이면 utm_source='retarget'으로 표기 — 시트에서 바로 구분용.
     // 리타겟은 항상 index(신규형) 경로로만 들어와 페이지 정보 손실 없음. A/B 집계 제외는 utm_campaign 필터가 담당(fetch_ab_variant).
     if (/^retarget/i.test(src.get("utm_campaign") || "")) hero = "retarget";

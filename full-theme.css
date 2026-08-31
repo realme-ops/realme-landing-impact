@@ -1,0 +1,48 @@
+/* full-theme.css — 합본 랜딩 /full 전용 테마 (2026-08-31)
+   베이스는 style-ink.css(라이트). 여기서 색만 '화이트 아이보리 배경 + 레드 액센트'로 덮는다.
+   style-ink.css 의 변수명을 그대로 재정의하므로, 반드시 style-ink.css *뒤에* 로드할 것. */
+
+:root{
+  /* 배경 — 화이트 아이보리 (거의 화이트에 온기만 남긴 값)
+     카드(#FFF)와 대비가 얕아지므로 보더로 경계를 잡는다. */
+  --navy:#FDFCF9;                    /* 기본 배경 */
+  --navy-deep:#F7F5F0;               /* 한 톤 진한 섹션 */
+  --navy-card:#FFFFFF;               /* 카드 */
+
+  /* 액센트·CTA — 레드 (얼굴형 style.css 의 레드를 승계) */
+  --lime:#e23b3b;                    /* 강조·체크·아이콘 */
+  --lime-soft:#eba0a0;               /* 강조 보조 */
+  --red:#e23b3b;                     /* CTA */
+  --red-deep:#c42b2b;                /* CTA hover */
+
+  /* 텍스트 — 아이보리에 맞춘 웜 차콜 */
+  --white:#2E2A26;                   /* 본문·타이틀 */
+  --muted:#7A7268;                   /* 설명·caption */
+
+  /* style-ink.css 헬퍼 변수의 대응값 */
+  --line:#EAE5DB;
+  --line-soft:rgba(46,42,38,.04);
+  --shadow:rgba(46,42,38,.08);
+  --ink-mid:#7A7268;
+  --terra-soft:rgba(226,59,59,.10);
+  --terra-line:rgba(226,59,59,.30);
+  --terra-bright:#e23b3b;
+}
+
+/* 히어로는 얼굴형 원본이 화이트 텍스트를 전제로 쓰던 곳이 있어, 밝은 배경에서 글자가
+   사라지지 않도록 본문색을 명시한다. */
+.hero, .hero .hero-sub, .hero .hero-title{ color:var(--white); }
+.hero .nav-row{ color:var(--muted); }
+
+/* 브랜드 로고가 화이트 PNG 라 밝은 배경에서 안 보인다 → 반전 */
+.hero .brand-logo{ filter:invert(1) brightness(.25); }
+
+/* 오퍼 카드 */
+.offer{ background:var(--navy-card); border-color:var(--terra-line); box-shadow:0 6px 24px var(--shadow); }
+.offer-kicker{ background:var(--red); color:#fff; }
+
+/* 고정 푸터 CTA · 실시간 배지 */
+.sticky-cta{ background:rgba(253,252,249,.95); border-top:1px solid var(--line); }
+.sticky-cta__text{ color:var(--white); }
+.live-viewers{ background:var(--navy-card); color:var(--white);
+               border:1px solid var(--line); box-shadow:0 4px 14px var(--shadow); }
