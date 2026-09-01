@@ -78,6 +78,26 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
     <h1 data-mark="hero_title" class="hero-title">얼굴은 그대로인데<br><em>애프터가 쏟아지기 시작한 남자들</em><br>대체 뭘 바꿨을까요?</h1>
     <p data-mark="hero_sub" class="hero-sub"><span style="display:block;font-size:15px;line-height:1.35;margin-bottom:14px;">대화도, 성형도 아니에요.</span>리얼미는 한 번의 사진, 한 번의 변신이 아니라<br><b>스스로 유지하는 모습</b>을 만듭니다.</p>
 
+    <!-- 2026-09-01 히어로 재배치: 증거(BA 슬라이더) 먼저 → 오퍼.
+         근거: 히어로 지점 측정 첫 데이터(8/31~9/1)에서 오퍼카드 직후 슬라이더 도달이 50%로 절벽.
+         상세형은 증거-먼저 구조로 슬라이더 통과 88% — 같은 순서로 교체. 슬라이더 8장→4장 축소.
+         판정: hero_plans 도달률(기준 43%) 상승 여부. -->
+    <div data-mark="hero_slider" class="slider">
+      <div class="slider-view">
+        <div class="slider-track" id="baTrack">
+          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-1.jpg"><img src="images/ba-before-1.jpg" alt="비포 1" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-1.jpg"><img src="images/ba-after-1.jpg" alt="애프터 1" onerror="this.style.display='none'"></div></div></div>
+          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-2.jpg"><img src="images/ba-before-2.jpg" alt="비포 2" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-2.jpg"><img src="images/ba-after-2.jpg" alt="애프터 2" onerror="this.style.display='none'"></div></div></div>
+          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-3.jpg"><img src="images/ba-before-3.jpg" alt="비포 3" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-3.jpg"><img src="images/ba-after-3.jpg" alt="애프터 3" onerror="this.style.display='none'"></div></div></div>
+          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-4.jpg"><img src="images/ba-before-4.jpg" alt="비포 4" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-4.jpg"><img src="images/ba-after-4.jpg" alt="애프터 4" onerror="this.style.display='none'"></div></div></div>
+        </div>
+      </div>
+      <button class="slider-btn prev" id="baPrev" aria-label="이전">‹</button>
+      <button class="slider-btn next" id="baNext" aria-label="다음">›</button>
+      <div class="slider-dots" id="baDots"></div>
+    </div>
+
+    <p class="slider-caption">* 리얼미 솔루션을 직접 경험한 실제 비포/애프터 사례입니다.</p>
+
     <!-- ===== 상단 오퍼 (킥커 + 카운트다운 + CTA) ===== -->
     <div data-mark="hero_offer" class="offer offer-top">
       <div class="offer-kicker">선착순 100명 한정 · 첫 방문 50% 특별 혜택</div>
@@ -89,27 +109,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
       <a href="#" class="offer-cta js-typeform" data-cta="offer-top">첫 방문 50% 혜택 신청하러 가기 →</a>
     </div>
 
-    <div data-mark="hero_slider" class="slider">
-      <div class="slider-view">
-        <div class="slider-track" id="baTrack">
-          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-1.jpg"><img src="images/ba-before-1.jpg" alt="비포 1" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-1.jpg"><img src="images/ba-after-1.jpg" alt="애프터 1" onerror="this.style.display='none'"></div></div></div>
-          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-2.jpg"><img src="images/ba-before-2.jpg" alt="비포 2" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-2.jpg"><img src="images/ba-after-2.jpg" alt="애프터 2" onerror="this.style.display='none'"></div></div></div>
-          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-3.jpg"><img src="images/ba-before-3.jpg" alt="비포 3" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-3.jpg"><img src="images/ba-after-3.jpg" alt="애프터 3" onerror="this.style.display='none'"></div></div></div>
-          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-4.jpg"><img src="images/ba-before-4.jpg" alt="비포 4" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-4.jpg"><img src="images/ba-after-4.jpg" alt="애프터 4" onerror="this.style.display='none'"></div></div></div>
-          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-5.jpg"><img src="images/ba-before-5.jpg" alt="비포 5" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-5.jpg"><img src="images/ba-after-5.jpg" alt="애프터 5" onerror="this.style.display='none'"></div></div></div>
-          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-6.jpg"><img src="images/ba-before-6.jpg" alt="비포 6" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-6.jpg"><img src="images/ba-after-6.jpg" alt="애프터 6" onerror="this.style.display='none'"></div></div></div>
-          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-7.jpg"><img src="images/ba-before-7.jpg" alt="비포 7" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-7.jpg"><img src="images/ba-after-7.jpg" alt="애프터 7" onerror="this.style.display='none'"></div></div></div>
-          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-8.jpg"><img src="images/ba-before-8.jpg" alt="비포 8" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-8.jpg"><img src="images/ba-after-8.jpg" alt="애프터 8" onerror="this.style.display='none'"></div></div></div>
-        </div>
-      </div>
-      <button class="slider-btn prev" id="baPrev" aria-label="이전">‹</button>
-      <button class="slider-btn next" id="baNext" aria-label="다음">›</button>
-      <div class="slider-dots" id="baDots"></div>
-    </div>
-
-    <p class="slider-caption">* 리얼미 솔루션을 직접 경험한 실제 비포/애프터 사례입니다.</p>
-
-    <!-- ===== 플랜 + 남은 쿠폰 오퍼 카드 ===== -->
+    <!-- ===== 플랜 + 남은 쿠폰 오퍼 카드 (2026-09-01 축소: 중복 자리바 제거 — 오퍼탑에 이미 있음) ===== -->
     <div data-mark="hero_plans" class="offer" id="offer">
       <div class="offer-plans">
         <div class="offer-plan">
@@ -131,10 +131,6 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
             <li>내추럴 SNS 사진 촬영</li>
           </ul>
         </div>
-      </div>
-      <div class="seats">
-        <div class="seats-bar"><div class="seats-fill"></div></div>
-        <div class="seats-text">남은 자리 <b class="seats-left-text">-</b>명 / 100명</div>
       </div>
       <a href="#" class="offer-cta js-typeform" data-cta="offer">첫 방문 50% 혜택 신청하러 가기 →</a>
       <p class="offer-note">신청서를 남긴 분에게만 <b>첫 방문 50% 혜택이 적용된 시크릿 페이지</b>가 열립니다.<br>선착순 마감되면 예고 없이 종료됩니다.<br>※ 리얼미 디렉팅은 <b>서울 송파 쇼룸 방문</b>으로 진행됩니다.</p>
