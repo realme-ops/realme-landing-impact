@@ -595,7 +595,7 @@ section{padding:60px 20px;}
 .hero--ba .hero-bg-tag.before{left:14px;}
 .hero--ba .hero-bg-tag.after{right:14px;background:var(--red,#e23b3b);border-color:var(--red,#e23b3b);}
 .hero--ba .hero-bg-shade{position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(13,14,16,.78) 0%,rgba(13,14,16,.42) 30%,rgba(13,14,16,.60) 55%,rgba(21,23,26,.94) 82%,var(--navy,#15171a) 100%);}
+  background:linear-gradient(180deg,rgba(13,14,16,.58) 0%,rgba(13,14,16,.34) 30%,rgba(13,14,16,.55) 55%,rgba(21,23,26,.92) 82%,var(--navy,#15171a) 100%);}
 .hero--ba>*:not(.hero-bg){position:relative;z-index:2;}
 .hero--ba .hero-title,.hero--ba .hero-sub{text-shadow:0 2px 16px rgba(0,0,0,.65);}
 .hero--ba .nav-row{border-bottom-color:rgba(255,255,255,.28);}
