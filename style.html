@@ -65,26 +65,13 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:wght@500;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css?v=20260901b" />
+<link rel="stylesheet" href="style.css?v=20260715a" />
 </head>
 <body>
 <main class="landing">
 
-  <!-- ===== 1. 히어로 + 오퍼 카드 =====
-       2026-09-01 2차 교체: BA 대비 이미지를 히어로 '배경'으로 — 첫 화면에서 증거가 바로 보이게.
-       (1차 순서교체 대신 사용자 결정. 판정 지표는 동일: hero_plans 도달률 기준 43% 상승 여부)
-       배경 = 대표 사례(1번 페어), 슬라이더는 중복 없이 사례 2~4 세 장. -->
-  <section data-sec="face_s01_hero" class="hero hero--ba" data-reveal>
-    <div class="hero-bg" aria-hidden="true">
-      <div class="hero-bg-imgs">
-        <img src="images/ba-before-1.jpg" alt="" onerror="this.style.display='none'">
-        <img src="images/ba-after-1.jpg" alt="" onerror="this.style.display='none'">
-      </div>
-      <span class="hero-bg-tag before">BEFORE</span>
-      <span class="hero-bg-tag after">AFTER</span>
-      <div class="hero-bg-shade"></div>
-    </div>
-
+  <!-- ===== 1. 히어로 + 오퍼 카드 ===== -->
+  <section data-sec="face_s01_hero" class="hero" data-reveal>
     <div class="nav-row">STYLING<img class="brand-logo" src="images/logo-white.png" alt="REAL ME">PERSONAL</div>
 
     <div class="hero-eyebrow">남성 이미지 컨설팅 · REAL ME</div>
@@ -105,9 +92,14 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
     <div data-mark="hero_slider" class="slider">
       <div class="slider-view">
         <div class="slider-track" id="baTrack">
+          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-1.jpg"><img src="images/ba-before-1.jpg" alt="비포 1" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-1.jpg"><img src="images/ba-after-1.jpg" alt="애프터 1" onerror="this.style.display='none'"></div></div></div>
           <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-2.jpg"><img src="images/ba-before-2.jpg" alt="비포 2" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-2.jpg"><img src="images/ba-after-2.jpg" alt="애프터 2" onerror="this.style.display='none'"></div></div></div>
           <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-3.jpg"><img src="images/ba-before-3.jpg" alt="비포 3" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-3.jpg"><img src="images/ba-after-3.jpg" alt="애프터 3" onerror="this.style.display='none'"></div></div></div>
           <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-4.jpg"><img src="images/ba-before-4.jpg" alt="비포 4" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-4.jpg"><img src="images/ba-after-4.jpg" alt="애프터 4" onerror="this.style.display='none'"></div></div></div>
+          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-5.jpg"><img src="images/ba-before-5.jpg" alt="비포 5" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-5.jpg"><img src="images/ba-after-5.jpg" alt="애프터 5" onerror="this.style.display='none'"></div></div></div>
+          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-6.jpg"><img src="images/ba-before-6.jpg" alt="비포 6" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-6.jpg"><img src="images/ba-after-6.jpg" alt="애프터 6" onerror="this.style.display='none'"></div></div></div>
+          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-7.jpg"><img src="images/ba-before-7.jpg" alt="비포 7" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-7.jpg"><img src="images/ba-after-7.jpg" alt="애프터 7" onerror="this.style.display='none'"></div></div></div>
+          <div class="ba-slide"><div class="ba-card"><span class="ba-tag">BEFORE</span><div class="imgslot r34" data-label="ba-before-8.jpg"><img src="images/ba-before-8.jpg" alt="비포 8" onerror="this.style.display='none'"></div></div><div class="ba-card after"><span class="ba-tag a">AFTER</span><div class="imgslot r34" data-label="ba-after-8.jpg"><img src="images/ba-after-8.jpg" alt="애프터 8" onerror="this.style.display='none'"></div></div></div>
         </div>
       </div>
       <button class="slider-btn prev" id="baPrev" aria-label="이전">‹</button>
@@ -117,7 +109,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
 
     <p class="slider-caption">* 리얼미 솔루션을 직접 경험한 실제 비포/애프터 사례입니다.</p>
 
-    <!-- ===== 플랜 + 남은 쿠폰 오퍼 카드 (2026-09-01 축소: 중복 자리바 제거 — 오퍼탑에 이미 있음) ===== -->
+    <!-- ===== 플랜 + 남은 쿠폰 오퍼 카드 ===== -->
     <div data-mark="hero_plans" class="offer" id="offer">
       <div class="offer-plans">
         <div class="offer-plan">
@@ -139,6 +131,10 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
             <li>내추럴 SNS 사진 촬영</li>
           </ul>
         </div>
+      </div>
+      <div class="seats">
+        <div class="seats-bar"><div class="seats-fill"></div></div>
+        <div class="seats-text">남은 자리 <b class="seats-left-text">-</b>명 / 100명</div>
       </div>
       <a href="#" class="offer-cta js-typeform" data-cta="offer">첫 방문 50% 혜택 신청하러 가기 →</a>
       <p class="offer-note">신청서를 남긴 분에게만 <b>첫 방문 50% 혜택이 적용된 시크릿 페이지</b>가 열립니다.<br>선착순 마감되면 예고 없이 종료됩니다.<br>※ 리얼미 디렉팅은 <b>서울 송파 쇼룸 방문</b>으로 진행됩니다.</p>
