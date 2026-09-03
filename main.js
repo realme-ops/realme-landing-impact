@@ -120,8 +120,12 @@
     // 리타겟 유입(2026-08-08): utm_campaign이 Retarget_* 이면 utm_source='retarget'으로 표기 — 시트에서 바로 구분용.
     // 리타겟은 항상 index(신규형) 경로로만 들어와 페이지 정보 손실 없음. A/B 집계 제외는 utm_campaign 필터가 담당(fetch_ab_variant).
     if (/^retarget/i.test(src.get("utm_campaign") || "")) hero = "retarget";
+    // 구글 유료 유입(2026-09-03): 자동태깅 click ID(gclid/gbraid/wbraid)가 있으면 utm_source를 버킷으로
+    // 덮지 않고 'google'로 표기 → 명단에서 Meta 전환과 분리. (iOS 인앱은 gclid 대신 gbraid/wbraid로 옴)
+    // Meta·기타 유입은 기존대로 히어로 버킷(기존형/신규형/통합형/retarget) 유지.
+    var isGoogle = !!(src.get("gclid") || src.get("gbraid") || src.get("wbraid"));
     FORWARD_KEYS.forEach(function (k) {
-      var v = (k === "utm_source") ? hero : src.get(k);
+      var v = (k === "utm_source") ? (isGoogle ? "google" : hero) : src.get(k);
       if (v) parts.push(encodeURIComponent(k) + "=" + encodeURIComponent(v));
     });
     return TYPEFORM + (parts.length ? "?" + parts.join("&") : "");
