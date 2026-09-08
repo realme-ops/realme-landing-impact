@@ -107,6 +107,14 @@
   })();
 
   /* 타입폼 URL 빌더 — 랜딩 UTM/클릭ID 전달 (impact-me와 동일한 검증된 방식) */
+  // 구글 캠페인 유형 라벨(2026-09-08): 시트 '유입경로'에서 SA/리마케팅/DG를 가르기 위해 utm_campaign(접미어 캠페인명)으로 판정
+  function googleLabel(camp) {
+    camp = String(camp || "").toLowerCase();
+    if (/리마케팅|rmk|remarket|^da_/.test(camp)) return "google_rmk";
+    if (/^sa_|search/.test(camp)) return "google_sa";
+    if (/demandgen|^dg_/.test(camp)) return "google_dg";
+    return "google";
+  }
   var FORWARD_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid", "gclid"];
   function buildTypeformUrl() {
     var src = new URLSearchParams(location.search), parts = [];
@@ -124,8 +132,9 @@
     // 덮지 않고 'google'로 표기 → 명단에서 Meta 전환과 분리. (iOS 인앱은 gclid 대신 gbraid/wbraid로 옴)
     // Meta·기타 유입은 기존대로 히어로 버킷(기존형/신규형/통합형/retarget) 유지.
     var isGoogle = !!(src.get("gclid") || src.get("gbraid") || src.get("wbraid"));
+    var gLabel = googleLabel(src.get("utm_campaign"));
     FORWARD_KEYS.forEach(function (k) {
-      var v = (k === "utm_source") ? (isGoogle ? "google" : hero) : src.get(k);
+      var v = (k === "utm_source") ? (isGoogle ? gLabel : hero) : src.get(k);
       if (v) parts.push(encodeURIComponent(k) + "=" + encodeURIComponent(v));
     });
     return TYPEFORM + (parts.length ? "?" + parts.join("&") : "");
